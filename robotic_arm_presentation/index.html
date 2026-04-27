@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotic Arm using Servo Motors — Digital Electronics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Extra styles specific to this presentation ── */
+    .parts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+      align-items: start;
+    }
+    .part-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--card-accent, var(--teal));
+    }
+    .part-card .part-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .part-card .part-qty {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--card-accent, var(--teal));
+      margin-bottom: 6px;
+    }
+    .part-card .part-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+    .part-card a {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(232,162,48,0.3);
+      transition: border-color 0.15s;
+    }
+    .part-card a:hover { border-color: var(--amber); }
+
+    .pin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .pin-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-card);
+    }
+    .pin-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+    .pin-table tr:last-child td { border-bottom: none; }
+    .pin-table tr:nth-child(even) td { background: var(--bg-card); }
+    .pin-mono { font-family: var(--font-mono); font-size: 12px; color: var(--teal); }
+    .pin-label { font-weight: 600; color: var(--text); }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+    }
+    .scope-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      border-top: 3px solid var(--card-accent, var(--teal));
+    }
+    .scope-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .scope-card p {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .qa-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 24px;
+      text-align: center;
+    }
+    .qa-big {
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .qa-sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .qa-hint {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .team-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .team-member {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 24px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .team-member .member-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .team-member .member-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--amber);
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .flow-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-align: center;
+      min-width: 90px;
+    }
+    .flow-box.hl { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+    .flow-box.hl-amber { border-color: var(--amber); color: var(--amber); background: var(--amber-dim); }
+    .flow-arrow { font-size: 18px; color: var(--text-muted); }
+
+    .code-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--teal);
+      text-decoration: none;
+      background: var(--teal-dim);
+      border: 1px solid rgba(56,178,160,0.25);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .code-link:hover { background: rgba(56,178,160,0.18); border-color: var(--teal); }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="slide-counter" id="slideCounter">1 / 9</div>
+  <div class="nav-hint" id="navHint"><span class="key">←</span> <span class="key">→</span> to navigate</div>
+
+  <!-- SLIDE 1: TITLE -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-content title-slide">
+      <div class="title-decoration">
+        <div class="deco-line deco-line-1"></div>
+        <div class="deco-line deco-line-2"></div>
+        <div class="deco-line deco-line-3"></div>
+      </div>
+      <div class="title-badge anim-item">Digital Electronics — Group Project</div>
+      <h1 class="main-title anim-item">
+        <span class="title-line-1">Robotic Arm</span>
+        <span class="title-line-2">using Servo Motors</span>
+      </h1>
+      <div class="title-subtitle anim-item">Bluetooth-Controlled via ESP32 &amp; MIT App Inventor</div>
+      <div class="title-divider anim-item"></div>
+      <div class="title-meta anim-item">
+        <span class="meta-label">Megh Rana</span><span class="meta-dot">·</span><span class="meta-value">25CE099</span>
+        <span class="meta-dot" style="margin-left:8px">·</span>
+        <span class="meta-label">Moksh Raval</span><span class="meta-dot">·</span><span class="meta-value">25CE101</span>
+        <span class="meta-dot" style="margin-left:8px">·</span>
+        <span class="meta-label">Kushagra Upadhyay</span><span class="meta-dot">·</span><span class="meta-value">25CE127</span>
+      </div>
+      <div class="title-footer anim-item">
+        <svg class="icon-chip" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="14" height="14" rx="2"/>
+          <line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/>
+          <line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/>
+          <line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/>
+          <line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/>
+        </svg>
+        <span>Digital Electronics — CSUC101</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: OVERVIEW -->
+  <section class="slide" id="slide-2">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">01</span>
+        <h2>Project Overview</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>What We Built</h3>
+            <p>A <strong>4-DOF robotic arm</strong> with a gripper, driven by four servo motors and controlled wirelessly over <strong>Bluetooth</strong> from an Android app we built ourselves using MIT App Inventor.</p>
+          </div>
+          <div class="card anim-item">
+            <h3>The Brain</h3>
+            <p>An <strong>ESP32-WROOM-32</strong> microcontroller handles both the Bluetooth Classic SPP stack and PWM signal generation for all four servos simultaneously — no additional PWM driver IC needed.</p>
+          </div>
+          <div class="highlight-box anim-item">
+            <div class="highlight-icon">📡</div>
+            <div>The Android app sends single-character prefixed angle commands (<code>A090</code>, <code>B045</code>…) over Bluetooth. The ESP32 parses and drives the corresponding servo in real time.</div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">System Architecture</div>
+            <div class="arch-flow">
+              <div class="flow-box hl-amber">Android App<br><small style="font-weight:400;color:inherit;opacity:0.7">MIT App Inventor</small></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box hl">Bluetooth<br><small style="font-weight:400;color:inherit;opacity:0.7">Classic SPP</small></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box hl">ESP32<br><small style="font-weight:400;color:inherit;opacity:0.7">WROOM-32</small></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">PWM<br><small style="font-weight:400;color:inherit;opacity:0.7">GPIO 23/27/18/13</small></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box hl-amber">4× Servos<br><small style="font-weight:400;color:inherit;opacity:0.7">SG90 / MG90</small></div>
+            </div>
+          </div>
+          <div class="card anim-item">
+            <h3>Chassis</h3>
+            <p>The arm structure is a <strong>custom 3D-printed chassis</strong>, designed to mount all four servos at the correct joint angles and keep the overall weight low enough for the SG90 torque rating.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: PARTS LIST -->
+  <section class="slide" id="slide-3">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">02</span>
+        <h2>Components &amp; Parts List</h2>
+      </div>
+      <div class="parts-grid">
+
+        <div class="part-card anim-item" style="--card-accent: var(--teal);">
+          <div class="part-name">SG90 / MG90 Micro Servo</div>
+          <div class="part-qty">Qty: 4</div>
+          <div class="part-desc">180° PWM servo motors. SG90 (plastic gear) for lighter joints; MG90 (metal gear) for the base requiring higher torque. 4.8–6 V, ~2.5 kg·cm stall torque.</div>
+          <a href="https://www.towerpro.com.tw/product/sg90-7/" target="_blank" rel="noopener">SG90 Datasheet ↗</a><br>
+          <a href="https://www.towerpro.com.tw/product/mg90s-3/" target="_blank" rel="noopener">MG90S Datasheet ↗</a>
+        </div>
+
+        <div class="part-card anim-item" style="--card-accent: var(--amber);">
+          <div class="part-name">ESP32-WROOM-32</div>
+          <div class="part-qty">Qty: 1</div>
+          <div class="part-desc">Dual-core 240 MHz MCU with integrated Bluetooth Classic &amp; Wi-Fi. 16 PWM-capable GPIO pins. Runs the ESP32Servo library for hardware-timer-backed PWM.</div>
+          <a href="https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf" target="_blank" rel="noopener">ESP32-WROOM-32 Datasheet ↗</a>
+        </div>
+
+        <div class="part-card anim-item" style="--card-accent: var(--rose);">
+          <div class="part-name">7805 Voltage Regulator</div>
+          <div class="part-qty">Qty: 1 · TO-220 Package</div>
+          <div class="part-desc">Linear regulator providing a stable <strong>5 V</strong> rail for the servo motors from the 7.4 V (2× 18650) battery pack. Input up to 35 V, 1 A continuous output.</div>
+          <a href="https://www.ti.com/lit/ds/symlink/lm7805.pdf" target="_blank" rel="noopener">LM7805 Datasheet ↗</a>
+        </div>
+
+        <div class="part-card anim-item" style="--card-accent: var(--slate);">
+          <div class="part-name">18650 Li-Ion Cells</div>
+          <div class="part-qty">Qty: 2 · Series (7.4 V)</div>
+          <div class="part-desc">Two 3.7 V 18650 cells in series supply ~7.4 V to the 7805 regulator. Provides sufficient headroom (≥2 V dropout) for stable 5 V output throughout discharge.</div>
+          <a href="https://www.orbtronic.com/content/samsung-35e-datasheet-18650-specs.pdf" target="_blank" rel="noopener">18650 Cell Datasheet ↗</a>
+        </div>
+
+        <div class="part-card anim-item" style="--card-accent: var(--teal);">
+          <div class="part-name">1000 µF Electrolytic Capacitor</div>
+          <div class="part-qty">Qty: 1 · 10 V+</div>
+          <div class="part-desc">Placed on the 5 V rail to absorb current spikes when servos change position simultaneously, preventing voltage dips that would reset the ESP32.</div>
+          <a href="https://www.nichicon.co.jp/english/products/pdfs/e-ucy.pdf" target="_blank" rel="noopener">Electrolytic Cap Datasheet ↗</a>
+        </div>
+
+        <div class="part-card anim-item" style="--card-accent: var(--amber);">
+          <div class="part-name">3D-Printed Chassis</div>
+          <div class="part-qty">Custom · PLA</div>
+          <div class="part-desc">Arm structure printed in PLA. Designed to mount all four servo joints at correct angles, keep weight minimal, and allow easy disassembly for iteration.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: POWER SUPPLY -->
+  <section class="slide" id="slide-4">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">03</span>
+        <h2>Power Supply Design</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>Supply Chain</h3>
+            <p>Two <strong>3.7 V 18650 Li-Ion cells</strong> in series give a nominal <strong>7.4 V</strong> (up to ~8.4 V fully charged). This feeds the 7805 linear regulator which outputs a clean <strong>5 V</strong> for the servo rail.</p>
+            <p>The ESP32 dev board has its own onboard 3.3 V LDO, so it is powered separately from the USB or the same 5 V rail via its VIN pin.</p>
+          </div>
+          <div class="card anim-item">
+            <h3>Why 7805?</h3>
+            <p>The <strong>LM7805 (TO-220)</strong> is simple, robust, and handles the ~1 A peak current demand of four servos moving simultaneously. The TO-220 package dissipates heat efficiently without a heatsink at our load levels.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">Power Rail Diagram</div>
+            <svg viewBox="0 0 340 180" width="100%" style="font-family:var(--font-mono)">
+              <!-- Battery -->
+              <rect x="10" y="70" width="70" height="40" rx="6" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="45" y="87" fill="var(--amber)" font-size="10" text-anchor="middle">2× 18650</text>
+              <text x="45" y="101" fill="var(--amber)" font-size="10" text-anchor="middle">7.4 V</text>
+              <!-- wire to 7805 -->
+              <line x1="80" y1="90" x2="120" y2="90" stroke="var(--text-dim)" stroke-width="1.5"/>
+              <!-- 7805 -->
+              <rect x="120" y="70" width="70" height="40" rx="6" fill="none" stroke="var(--rose)" stroke-width="1.5"/>
+              <text x="155" y="87" fill="var(--rose)" font-size="10" text-anchor="middle">LM7805</text>
+              <text x="155" y="101" fill="var(--rose)" font-size="10" text-anchor="middle">TO-220</text>
+              <!-- wire to cap -->
+              <line x1="190" y1="90" x2="220" y2="90" stroke="var(--text-dim)" stroke-width="1.5"/>
+              <!-- cap symbol -->
+              <line x1="220" y1="75" x2="220" y2="105" stroke="var(--teal)" stroke-width="2"/>
+              <line x1="228" y1="75" x2="228" y2="105" stroke="var(--teal)" stroke-width="2"/>
+              <text x="224" y="120" fill="var(--teal)" font-size="9" text-anchor="middle">1000µF</text>
+              <!-- wire to servos -->
+              <line x1="228" y1="90" x2="270" y2="90" stroke="var(--text-dim)" stroke-width="1.5"/>
+              <!-- 5V label -->
+              <text x="248" y="82" fill="var(--teal)" font-size="10" text-anchor="middle">5 V</text>
+              <!-- servos box -->
+              <rect x="270" y="60" width="60" height="60" rx="6" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+              <text x="300" y="85" fill="var(--teal)" font-size="10" text-anchor="middle">4×</text>
+              <text x="300" y="99" fill="var(--teal)" font-size="10" text-anchor="middle">Servos</text>
+              <!-- GND line -->
+              <line x1="45" y1="110" x2="45" y2="150" stroke="var(--text-muted)" stroke-width="1.5"/>
+              <line x1="155" y1="110" x2="155" y2="150" stroke="var(--text-muted)" stroke-width="1.5"/>
+              <line x1="300" y1="120" x2="300" y2="150" stroke="var(--text-muted)" stroke-width="1.5"/>
+              <line x1="45" y1="150" x2="300" y2="150" stroke="var(--text-muted)" stroke-width="1.5"/>
+              <text x="172" y="165" fill="var(--text-muted)" font-size="10" text-anchor="middle">GND</text>
+            </svg>
+          </div>
+          <div class="comparison-mini anim-item">
+            <div class="cmp-row"><span class="cmp-label">Battery voltage</span><span class="cmp-value cmp-warn">7.4 V nominal</span></div>
+            <div class="cmp-row"><span class="cmp-label">Regulator output</span><span class="cmp-value cmp-good">5.0 V stable</span></div>
+            <div class="cmp-row"><span class="cmp-label">Dropout headroom</span><span class="cmp-value cmp-good">~2.4 V (safe)</span></div>
+            <div class="cmp-row"><span class="cmp-label">Bulk capacitor</span><span class="cmp-value cmp-good">1000 µF — spike buffer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: ESP32 & GPIO PINS -->
+  <section class="slide" id="slide-5">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">04</span>
+        <h2>ESP32 &amp; GPIO Pin Assignment</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>Why These Pins?</h3>
+            <p>The <strong>ESP32Servo</strong> library uses hardware timers (LEDC peripheral) for PWM. Pins 23, 27, 18, and 13 are all <strong>output-capable, PWM-compatible</strong> GPIO pins with no conflicts with the Bluetooth stack, SPI flash, or strapping pins.</p>
+          </div>
+          <div class="card anim-item">
+            <h3>PWM Parameters</h3>
+            <p>Each servo is attached with a pulse range of <strong>500 µs – 2400 µs</strong>, covering the full 0°–180° range of the SG90/MG90. The ESP32 allocates one hardware timer per servo (timers 0–3).</p>
+          </div>
+          <div class="anim-item" style="margin-top:4px">
+            <a class="code-link" href="https://github.com/25CE101-MOKSH-CE-CSPIT/BLUETOOTH-CONTROLLED-ROBOTIC-ARM/blob/main/BLUETOOTH_ARM_CONTROLLER_CODE/BLUETOOTH_ARM_CONTROLLER_CODE.ino" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              View Full Source Code on GitHub ↗
+            </a>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">Servo → GPIO Mapping</div>
+            <table class="pin-table">
+              <thead>
+                <tr><th>Servo</th><th>Joint</th><th>GPIO Pin</th><th>Timer</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pin-label">S1</td>
+                  <td>Base Rotation</td>
+                  <td class="pin-mono">GPIO 23</td>
+                  <td class="pin-mono">Timer 0</td>
+                </tr>
+                <tr>
+                  <td class="pin-label">S2</td>
+                  <td>Arm Up / Down</td>
+                  <td class="pin-mono">GPIO 27</td>
+                  <td class="pin-mono">Timer 1</td>
+                </tr>
+                <tr>
+                  <td class="pin-label">S3</td>
+                  <td>Arm Extension</td>
+                  <td class="pin-mono">GPIO 18</td>
+                  <td class="pin-mono">Timer 2</td>
+                </tr>
+                <tr>
+                  <td class="pin-label">S4</td>
+                  <td>Gripper Open/Close</td>
+                  <td class="pin-mono">GPIO 13</td>
+                  <td class="pin-mono">Timer 3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="formula-card anim-item">
+            <div class="formula-label">Command Protocol</div>
+            <div class="formula" style="font-size:13px">
+              &lt;ServoID&gt;&lt;Angle&gt; &nbsp;→&nbsp; e.g. <span style="color:var(--amber)">A090</span>, <span style="color:var(--teal)">D045</span>
+            </div>
+            <div class="formula-note">A=Base · B=Arm Up/Down · C=Extension · D=Gripper · Angle: 0–180</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: SOFTWARE -->
+  <section class="slide" id="slide-6">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">05</span>
+        <h2>Software &amp; App</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>ESP32 Firmware</h3>
+            <p>Written in <strong>Arduino C++</strong> using the <strong>ESP32Servo</strong> library for hardware-timer PWM and the built-in <strong>BluetoothSerial</strong> library for Classic BT SPP. The firmware reads incoming characters, buffers them until a new command prefix arrives, then parses and drives the servo.</p>
+          </div>
+          <div class="step-list anim-item">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Allocate 4 hardware PWM timers on boot</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Attach each servo with 500–2400 µs pulse range</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Start Bluetooth as <strong>"RobotArm"</strong> device</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Loop: read BT stream → parse command → <code>servo.write(angle)</code></div></div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="card anim-item">
+            <h3>Android App — MIT App Inventor</h3>
+            <p>A custom Android app built with <strong>MIT App Inventor</strong>. It connects to the ESP32 over Bluetooth Classic, presents four sliders (one per servo), and sends the corresponding angle command string on every slider change.</p>
+            <p>No third-party app needed — full control over the UI and command format.</p>
+          </div>
+          <div class="comparison-mini anim-item">
+            <div class="cmp-row"><span class="cmp-label">Firmware language</span><span class="cmp-value cmp-good">Arduino C++</span></div>
+            <div class="cmp-row"><span class="cmp-label">Servo library</span><span class="cmp-value cmp-good">ESP32Servo</span></div>
+            <div class="cmp-row"><span class="cmp-label">BT library</span><span class="cmp-value cmp-good">BluetoothSerial (built-in)</span></div>
+            <div class="cmp-row"><span class="cmp-label">App platform</span><span class="cmp-value cmp-good">MIT App Inventor</span></div>
+            <div class="cmp-row"><span class="cmp-label">Connection type</span><span class="cmp-value cmp-warn">Bluetooth Classic SPP</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: FUTURE SCOPE -->
+  <section class="slide" id="slide-7">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">06</span>
+        <h2>Future Scope</h2>
+      </div>
+      <p class="slide-intro anim-item">With better hardware and further development, this project can evolve from a prototype into a real-world automation platform.</p>
+      <div class="scope-grid">
+        <div class="scope-card anim-item" style="--card-accent: var(--teal);">
+          <h3>🎮 Gyro / Accelerometer Control</h3>
+          <p>Replace the slider UI with a <strong>phone IMU or a standalone MPU-6050</strong> worn on the hand. Map wrist orientation directly to arm joint angles for intuitive, gesture-based control.</p>
+        </div>
+        <div class="scope-card anim-item" style="--card-accent: var(--amber);">
+          <h3>🏭 Industrial Pick-and-Place</h3>
+          <p>Scale up with <strong>higher-torque stepper or DC servo motors</strong> and a rigid metal chassis. Automate repetitive pick-and-place tasks on factory lines — from delicate CPU dies to heavier components.</p>
+        </div>
+        <div class="scope-card anim-item" style="--card-accent: var(--rose);">
+          <h3>🔧 Welding &amp; Hazardous Tasks</h3>
+          <p>Deploy in environments unsafe for humans — <strong>welding, chemical handling, or high-temperature assembly</strong>. Consistent, repeatable motion makes robotic arms ideal for precision industrial processes.</p>
+        </div>
+        <div class="scope-card anim-item" style="--card-accent: var(--slate);">
+          <h3>🤖 Autonomous Automation</h3>
+          <p>Add <strong>computer vision (camera + ML model)</strong> to detect and classify objects. The arm can then autonomously sort, assemble, or inspect parts without human input — a step toward full factory automation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: Q&A -->
+  <section class="slide" id="slide-8">
+    <div class="slide-content">
+      <div class="qa-center">
+        <div class="qa-big anim-item">Q &amp; A</div>
+        <div class="qa-sub anim-item">We're ready for your questions.</div>
+        <div class="qa-hint anim-item">← → to navigate · press End for last slide</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: THANK YOU -->
+  <section class="slide" id="slide-9">
+    <div class="slide-content title-slide">
+      <div class="title-decoration">
+        <div class="deco-line deco-line-1"></div>
+        <div class="deco-line deco-line-2"></div>
+        <div class="deco-line deco-line-3"></div>
+      </div>
+      <div class="title-badge anim-item">Digital Electronics — CSUC101</div>
+      <h1 class="main-title anim-item">
+        <span class="title-line-1">Thank</span>
+        <span class="title-line-2">You</span>
+      </h1>
+      <div class="title-divider anim-item"></div>
+      <div class="team-row anim-item">
+        <div class="team-member">
+          <div class="member-name">Megh Rana</div>
+          <div class="member-id">25CE099</div>
+        </div>
+        <div class="team-member">
+          <div class="member-name">Moksh Raval</div>
+          <div class="member-id">25CE101</div>
+        </div>
+        <div class="team-member">
+          <div class="member-name">Kushagra Upadhyay</div>
+          <div class="member-id">25CE127</div>
+        </div>
+      </div>
+      <div class="title-footer anim-item" style="margin-top:32px">
+        <svg class="icon-chip" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="14" height="14" rx="2"/>
+          <line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/>
+          <line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/>
+          <line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/>
+          <line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/>
+        </svg>
+        <span>Robotic Arm using Servo Motors — Group Project</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
