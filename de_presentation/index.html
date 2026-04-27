@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAC: Accuracy vs Efficiency — Digital Electronics</title>
+  <meta name="description" content="Digital to Analog Conversion: Accuracy vs Efficiency - A Digital Electronics Video Presentation by 25CE099 Megh Rana">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Slide Counter -->
+  <div class="slide-counter" id="slideCounter">1 / 12</div>
+
+  <!-- Navigation Hints -->
+  <div class="nav-hint" id="navHint">
+    <span class="key">←</span> <span class="key">→</span> to navigate
+  </div>
+
+  <!-- ==================== SLIDE 1: TITLE ==================== -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-content title-slide">
+      <div class="title-decoration">
+        <div class="deco-line deco-line-1"></div>
+        <div class="deco-line deco-line-2"></div>
+        <div class="deco-line deco-line-3"></div>
+      </div>
+      <div class="title-badge anim-item">Digital Electronics</div>
+      <h1 class="main-title anim-item">
+        <span class="title-line-1">Digital to Analog</span>
+        <span class="title-line-2">Conversion</span>
+      </h1>
+      <div class="title-subtitle anim-item">Accuracy vs Efficiency</div>
+      <div class="title-divider anim-item"></div>
+      <div class="title-meta anim-item">
+        <span class="meta-label">Video Presentation</span>
+        <span class="meta-dot">·</span>
+        <span class="meta-value">25CE099 — Megh Rana</span>
+      </div>
+      <div class="title-footer anim-item">
+        <svg class="icon-chip" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="14" height="14" rx="2"/>
+          <line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/>
+          <line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/>
+          <line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/>
+          <line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/>
+        </svg>
+        <span>Digital Electronics — CSUC101</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: WHAT IS A DAC? ==================== -->
+  <section class="slide" id="slide-2">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">01</span>
+        <h2>What is a DAC?</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>The Problem</h3>
+            <p>Computers process signals in <strong>discrete binary</strong> form — sequences of 0s and 1s. But the real world operates on <strong>continuous analog</strong> signals — sound, voltage, temperature.</p>
+          </div>
+          <div class="card anim-item">
+            <h3>The Solution</h3>
+            <p>A <strong>Digital-to-Analog Converter (DAC)</strong> bridges this gap. It takes a binary digital input and converts it into a proportional <strong>analog voltage or current</strong> output.</p>
+          </div>
+          <div class="highlight-box anim-item">
+            <div class="highlight-icon">⚡</div>
+            <div>Every speaker, display, and motor controller relies on DACs to interface digital systems with the physical world.</div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="block-diagram">
+              <div class="block-input">
+                <div class="signal-label">Digital Input</div>
+                <div class="binary-stream">
+                  <span class="bit">1</span><span class="bit">0</span><span class="bit">1</span><span class="bit">1</span>
+                </div>
+              </div>
+              <div class="block-arrow">
+                <svg viewBox="0 0 60 24" width="60" height="24">
+                  <line x1="0" y1="12" x2="48" y2="12" stroke="var(--amber)" stroke-width="2"/>
+                  <polygon points="48,6 60,12 48,18" fill="var(--amber)"/>
+                </svg>
+              </div>
+              <div class="block-dac">
+                <div class="dac-box">DAC</div>
+              </div>
+              <div class="block-arrow">
+                <svg viewBox="0 0 60 24" width="60" height="24">
+                  <line x1="0" y1="12" x2="48" y2="12" stroke="var(--teal)" stroke-width="2"/>
+                  <polygon points="48,6 60,12 48,18" fill="var(--teal)"/>
+                </svg>
+              </div>
+              <div class="block-output">
+                <div class="signal-label">Analog Output</div>
+                <svg class="wave-svg" viewBox="0 0 120 50" width="120" height="50">
+                  <path d="M0,25 Q15,0 30,25 Q45,50 60,25 Q75,0 90,25 Q105,50 120,25" fill="none" stroke="var(--teal)" stroke-width="2.5" class="wave-path"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="formula-card anim-item">
+            <div class="formula-label">Output Voltage</div>
+            <div class="formula">V<sub>out</sub> = V<sub>ref</sub> × (D / 2<sup>n</sup>)</div>
+            <div class="formula-note">where D = digital input value, n = number of bits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: HOW DACs WORK ==================== -->
+  <section class="slide" id="slide-3">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">02</span>
+        <h2>How DACs Work</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>The Conversion Process</h3>
+            <p>A DAC takes an <strong>n-bit binary word</strong> and generates one of <strong>2<sup>n</sup> possible voltage levels</strong>. The output steps through these levels as the digital input changes.</p>
+          </div>
+          <div class="step-list anim-item">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Receive</strong> the digital binary code</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Weight</strong> each bit by its positional significance</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Sum</strong> the weighted contributions</div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Output</strong> the resulting analog voltage</div>
+            </div>
+          </div>
+          <div class="card anim-item">
+            <h3>Resolution Matters</h3>
+            <p>An <strong>8-bit DAC</strong> produces 256 levels. A <strong>16-bit DAC</strong> produces 65,536 levels — making the staircase output increasingly smooth and closer to the ideal analog signal.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">Staircase Output — 3-bit DAC</div>
+            <svg class="staircase-svg" viewBox="0 0 300 220" width="100%" height="auto">
+              <!-- Axes -->
+              <line x1="40" y1="10" x2="40" y2="190" stroke="var(--text-dim)" stroke-width="1"/>
+              <line x1="40" y1="190" x2="290" y2="190" stroke="var(--text-dim)" stroke-width="1"/>
+              <text x="15" y="105" fill="var(--text-dim)" font-size="11" transform="rotate(-90,15,105)" text-anchor="middle" font-family="Inter">Voltage</text>
+              <text x="165" y="210" fill="var(--text-dim)" font-size="11" text-anchor="middle" font-family="Inter">Digital Code (000 → 111)</text>
+              <!-- Ideal line -->
+              <line x1="40" y1="185" x2="280" y2="15" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+              <!-- Staircase -->
+              <polyline points="40,185 72,185 72,160 104,160 104,135 136,135 136,110 168,110 168,85 200,85 200,60 232,60 232,35 280,35" fill="none" stroke="var(--teal)" stroke-width="2.5" class="staircase-path"/>
+              <!-- Labels -->
+              <text x="283" y="18" fill="var(--amber)" font-size="9" font-family="Inter">Ideal</text>
+              <text x="283" y="38" fill="var(--teal)" font-size="9" font-family="Inter">Actual</text>
+              <!-- Level labels -->
+              <text x="35" y="188" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">0</text>
+              <text x="35" y="163" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">1</text>
+              <text x="35" y="138" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">2</text>
+              <text x="35" y="113" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">3</text>
+              <text x="35" y="88" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">4</text>
+              <text x="35" y="63" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">5</text>
+              <text x="35" y="38" fill="var(--text-dim)" font-size="8" text-anchor="end" font-family="Inter">6</text>
+            </svg>
+          </div>
+          <div class="info-tag anim-item">
+            <span class="tag-label">Key Insight</span>
+            The gap between the staircase and the ideal line is the <strong>quantization error</strong> — the fundamental accuracy limitation of any DAC.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: DAC ARCHITECTURES OVERVIEW ==================== -->
+  <section class="slide" id="slide-4">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">03</span>
+        <h2>DAC Architectures</h2>
+      </div>
+      <p class="slide-intro anim-item">Three dominant architectures, each with different trade-offs between accuracy, speed, and complexity.</p>
+      <div class="three-cards">
+        <div class="arch-card anim-item" style="--card-accent: var(--amber);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--amber)" stroke-width="2">
+              <rect x="8" y="12" width="32" height="24" rx="3"/>
+              <line x1="14" y1="18" x2="14" y2="30"/><line x1="20" y1="22" x2="20" y2="30"/>
+              <line x1="26" y1="16" x2="26" y2="30"/><line x1="32" y1="20" x2="32" y2="30"/>
+            </svg>
+          </div>
+          <h3>Binary Weighted</h3>
+          <p>Uses resistors scaled in binary ratios: R, 2R, 4R, 8R…</p>
+          <div class="arch-tags">
+            <span class="tag tag-pro">Simple design</span>
+            <span class="tag tag-pro">Fast conversion</span>
+            <span class="tag tag-con">Scales poorly</span>
+            <span class="tag tag-con">Needs precise R values</span>
+          </div>
+        </div>
+        <div class="arch-card anim-item" style="--card-accent: var(--teal);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--teal)" stroke-width="2">
+              <line x1="8" y1="24" x2="16" y2="24"/>
+              <rect x="16" y="20" width="6" height="8" rx="1"/>
+              <line x1="22" y1="24" x2="26" y2="24"/>
+              <rect x="26" y="20" width="6" height="8" rx="1"/>
+              <line x1="32" y1="24" x2="40" y2="24"/>
+              <line x1="19" y1="28" x2="19" y2="36"/><line x1="29" y1="28" x2="29" y2="36"/>
+              <rect x="16" y="36" width="6" height="6" rx="1"/>
+              <rect x="26" y="36" width="6" height="6" rx="1"/>
+            </svg>
+          </div>
+          <h3>R-2R Ladder</h3>
+          <p>Uses only two resistor values (R and 2R) in a repeating ladder network.</p>
+          <div class="arch-tags">
+            <span class="tag tag-pro">Only 2 R values</span>
+            <span class="tag tag-pro">Scales well</span>
+            <span class="tag tag-con">Matching still needed</span>
+            <span class="tag tag-con">Moderate accuracy</span>
+          </div>
+        </div>
+        <div class="arch-card anim-item" style="--card-accent: var(--rose);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--rose)" stroke-width="2">
+              <path d="M8,24 Q14,8 20,24 Q26,40 32,24 Q38,8 44,24" stroke-width="2"/>
+              <line x1="8" y1="36" x2="44" y2="36" stroke-dasharray="3,3" opacity="0.5"/>
+              <circle cx="20" cy="24" r="2" fill="var(--rose)"/>
+              <circle cx="32" cy="24" r="2" fill="var(--rose)"/>
+            </svg>
+          </div>
+          <h3>Sigma-Delta (ΣΔ)</h3>
+          <p>Uses oversampling and noise shaping to achieve high resolution digitally.</p>
+          <div class="arch-tags">
+            <span class="tag tag-pro">High resolution</span>
+            <span class="tag tag-pro">Excellent linearity</span>
+            <span class="tag tag-con">High latency</span>
+            <span class="tag tag-con">Complex design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: BINARY WEIGHTED DAC ==================== -->
+  <section class="slide" id="slide-5">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">04</span>
+        <h2>Binary Weighted Resistor DAC</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>Working Principle</h3>
+            <p>Each bit of the digital input controls a switch connected to a resistor. The resistor values are <strong>weighted in binary</strong>: the MSB has resistance R, the next has 2R, then 4R, and so on.</p>
+            <p>All switch outputs feed into a <strong>summing amplifier</strong> (op-amp), which adds the weighted currents to produce the analog output.</p>
+          </div>
+          <div class="card card-warn anim-item">
+            <h3>The Scaling Problem</h3>
+            <p>For an <strong>8-bit DAC</strong>, resistor values range from R to 128R. For <strong>12 bits</strong>, that's R to 2048R. Manufacturing such a wide range with matched precision is extremely difficult and expensive.</p>
+            <p>This is why binary-weighted DACs are impractical beyond <strong>4–6 bits</strong> in most real applications.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">4-Bit Binary Weighted Circuit</div>
+            <svg viewBox="0 0 320 240" width="100%" class="circuit-svg">
+              <!-- Switches and Resistors -->
+              <text x="10" y="42" fill="var(--text-dim)" font-size="11" font-family="Inter">B3 (MSB)</text>
+              <line x1="80" y1="38" x2="120" y2="38" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="120" y="30" width="60" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="150" y="42" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">R</text>
+              <line x1="180" y1="38" x2="240" y2="38" stroke="var(--amber)" stroke-width="2"/>
+
+              <text x="10" y="87" fill="var(--text-dim)" font-size="11" font-family="Inter">B2</text>
+              <line x1="80" y1="83" x2="120" y2="83" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="120" y="75" width="60" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="150" y="87" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">2R</text>
+              <line x1="180" y1="83" x2="240" y2="83" stroke="var(--amber)" stroke-width="2"/>
+
+              <text x="10" y="132" fill="var(--text-dim)" font-size="11" font-family="Inter">B1</text>
+              <line x1="80" y1="128" x2="120" y2="128" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="120" y="120" width="60" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="150" y="132" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">4R</text>
+              <line x1="180" y1="128" x2="240" y2="128" stroke="var(--amber)" stroke-width="2"/>
+
+              <text x="10" y="177" fill="var(--text-dim)" font-size="11" font-family="Inter">B0 (LSB)</text>
+              <line x1="80" y1="173" x2="120" y2="173" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="120" y="165" width="60" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="150" y="177" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">8R</text>
+              <line x1="180" y1="173" x2="240" y2="173" stroke="var(--amber)" stroke-width="2"/>
+
+              <!-- Summing node -->
+              <line x1="240" y1="38" x2="240" y2="173" stroke="var(--teal)" stroke-width="2"/>
+              <line x1="240" y1="105" x2="260" y2="105" stroke="var(--teal)" stroke-width="2"/>
+
+              <!-- Op-amp triangle -->
+              <polygon points="260,80 260,130 305,105" fill="none" stroke="var(--teal)" stroke-width="2"/>
+              <text x="275" y="100" fill="var(--text-dim)" font-size="8" font-family="Inter">−</text>
+              <text x="275" y="118" fill="var(--text-dim)" font-size="8" font-family="Inter">+</text>
+
+              <!-- Output -->
+              <line x1="305" y1="105" x2="315" y2="105" stroke="var(--teal)" stroke-width="2"/>
+              <text x="308" y="98" fill="var(--teal)" font-size="10" font-family="Inter">V<tspan font-size="7" dy="3">out</tspan></text>
+            </svg>
+          </div>
+          <div class="formula-card anim-item">
+            <div class="formula-label">Output Formula</div>
+            <div class="formula">V<sub>out</sub> = −V<sub>ref</sub> · R<sub>f</sub> · (B3/R + B2/2R + B1/4R + B0/8R)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: R-2R LADDER DAC ==================== -->
+  <section class="slide" id="slide-6">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">05</span>
+        <h2>R-2R Ladder DAC</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>Working Principle</h3>
+            <p>Instead of binary-scaled resistors, the R-2R ladder uses only <strong>two resistor values</strong>: R and 2R, arranged in a repeating ladder network.</p>
+            <p>Each switch routes current either to the output summing node or to ground, based on the corresponding bit. The ladder network inherently creates the <strong>binary weighting</strong> through voltage division.</p>
+          </div>
+          <div class="card anim-item">
+            <h3>Why It's Better</h3>
+            <p>Since only two resistor values are needed, <strong>matching is far easier</strong> even at high resolutions. A 16-bit R-2R DAC still only uses R and 2R — no extreme resistor ratios required.</p>
+            <p>This makes R-2R the most common architecture for <strong>precision and high-speed DACs</strong> in instrumentation and audio applications.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">R-2R Ladder Network</div>
+            <svg viewBox="0 0 340 180" width="100%" class="circuit-svg">
+              <!-- Horizontal R resistors -->
+              <rect x="60" y="32" width="50" height="16" rx="3" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+              <text x="85" y="44" fill="var(--teal)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">R</text>
+
+              <rect x="145" y="32" width="50" height="16" rx="3" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+              <text x="170" y="44" fill="var(--teal)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">R</text>
+
+              <rect x="230" y="32" width="50" height="16" rx="3" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+              <text x="255" y="44" fill="var(--teal)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">R</text>
+
+              <!-- Connecting horizontal lines -->
+              <line x1="30" y1="40" x2="60" y2="40" stroke="var(--teal)" stroke-width="2"/>
+              <line x1="110" y1="40" x2="145" y2="40" stroke="var(--teal)" stroke-width="2"/>
+              <line x1="195" y1="40" x2="230" y2="40" stroke="var(--teal)" stroke-width="2"/>
+              <line x1="280" y1="40" x2="320" y2="40" stroke="var(--teal)" stroke-width="2"/>
+
+              <!-- Vertical 2R resistors -->
+              <line x1="30" y1="48" x2="30" y2="65" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="5" y="65" width="50" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="30" y="77" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">2R</text>
+              <line x1="30" y1="81" x2="30" y2="100" stroke="var(--amber)" stroke-width="2"/>
+
+              <line x1="115" y1="48" x2="115" y2="65" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="90" y="65" width="50" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="115" y="77" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">2R</text>
+              <line x1="115" y1="81" x2="115" y2="100" stroke="var(--amber)" stroke-width="2"/>
+
+              <line x1="200" y1="48" x2="200" y2="65" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="175" y="65" width="50" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="200" y="77" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">2R</text>
+              <line x1="200" y1="81" x2="200" y2="100" stroke="var(--amber)" stroke-width="2"/>
+
+              <line x1="285" y1="48" x2="285" y2="65" stroke="var(--amber)" stroke-width="2"/>
+              <rect x="260" y="65" width="50" height="16" rx="3" fill="none" stroke="var(--amber)" stroke-width="1.5"/>
+              <text x="285" y="77" fill="var(--amber)" font-size="10" text-anchor="middle" font-family="JetBrains Mono">2R</text>
+              <line x1="285" y1="81" x2="285" y2="100" stroke="var(--amber)" stroke-width="2"/>
+
+              <!-- Switch labels -->
+              <text x="30" y="115" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="Inter">B3</text>
+              <text x="30" y="128" fill="var(--text-dim)" font-size="8" text-anchor="middle" font-family="Inter">(MSB)</text>
+              <text x="115" y="115" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="Inter">B2</text>
+              <text x="200" y="115" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="Inter">B1</text>
+              <text x="285" y="115" fill="var(--text-dim)" font-size="10" text-anchor="middle" font-family="Inter">B0</text>
+              <text x="285" y="128" fill="var(--text-dim)" font-size="8" text-anchor="middle" font-family="Inter">(LSB)</text>
+
+              <!-- Output label -->
+              <text x="325" y="36" fill="var(--teal)" font-size="11" font-family="Inter">V<tspan font-size="8" dy="3">out</tspan></text>
+            </svg>
+          </div>
+          <div class="comparison-mini anim-item">
+            <div class="cmp-row">
+              <span class="cmp-label">Resistor types needed:</span>
+              <span class="cmp-value cmp-good">Only 2 (R and 2R)</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Scalability:</span>
+              <span class="cmp-value cmp-good">Up to 16+ bits</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Speed:</span>
+              <span class="cmp-value cmp-good">Fast — no DSP overhead</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Limitation:</span>
+              <span class="cmp-value cmp-warn">Resistor matching at high bits</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: SIGMA-DELTA DAC ==================== -->
+  <section class="slide" id="slide-7">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">06</span>
+        <h2>Sigma-Delta (ΣΔ) DAC</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>A Different Approach</h3>
+            <p>Unlike resistor-based DACs, Sigma-Delta converters achieve high accuracy through <strong>digital signal processing</strong> rather than precise analog components.</p>
+          </div>
+          <div class="step-list anim-item">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Oversampling</strong> — The input is sampled at many times the Nyquist rate (e.g., 64× or 256×)</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Noise Shaping</strong> — Quantization noise is pushed to higher frequencies through feedback</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Low-Pass Filtering</strong> — A filter removes the shaped noise, leaving a clean analog output</div>
+            </div>
+          </div>
+          <div class="card anim-item">
+            <h3>Key Advantage</h3>
+            <p>Precision depends on <strong>time and digital math</strong>, not on matched resistors. This makes ΣΔ DACs the standard for <strong>high-resolution audio</strong> (24–32 bit) and low-cost consumer electronics.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="diagram-box anim-item">
+            <div class="staircase-title">Sigma-Delta Signal Flow</div>
+            <div class="sd-flow">
+              <div class="sd-block">
+                <div class="sd-box">Digital<br>Input</div>
+              </div>
+              <div class="sd-arrow">→</div>
+              <div class="sd-block">
+                <div class="sd-box sd-highlight">Interpolation<br>Filter</div>
+                <div class="sd-note">Upsample to high rate</div>
+              </div>
+              <div class="sd-arrow">→</div>
+              <div class="sd-block">
+                <div class="sd-box sd-highlight">ΣΔ<br>Modulator</div>
+                <div class="sd-note">Noise shaping</div>
+              </div>
+              <div class="sd-arrow">→</div>
+              <div class="sd-block">
+                <div class="sd-box">1-bit<br>DAC</div>
+              </div>
+              <div class="sd-arrow">→</div>
+              <div class="sd-block">
+                <div class="sd-box sd-highlight">Analog<br>LPF</div>
+                <div class="sd-note">Remove noise</div>
+              </div>
+              <div class="sd-arrow">→</div>
+              <div class="sd-block">
+                <div class="sd-box">Analog<br>Output</div>
+              </div>
+            </div>
+          </div>
+          <div class="comparison-mini anim-item">
+            <div class="cmp-row">
+              <span class="cmp-label">Resolution:</span>
+              <span class="cmp-value cmp-good">Up to 32 bits</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Linearity:</span>
+              <span class="cmp-value cmp-good">Excellent (digital precision)</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Cost:</span>
+              <span class="cmp-value cmp-good">Low (mostly digital logic)</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Latency:</span>
+              <span class="cmp-value cmp-warn">High — filtering takes time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: MEASURING ACCURACY ==================== -->
+  <section class="slide" id="slide-8">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">07</span>
+        <h2>Measuring Accuracy</h2>
+      </div>
+      <p class="slide-intro anim-item">Accuracy in DACs is not a single number — it's defined by multiple specifications that together determine how faithfully the output represents the digital input.</p>
+      <div class="metric-grid">
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--amber);">RES</div>
+            <h3>Resolution</h3>
+          </div>
+          <p>Number of bits the DAC can process. An <strong>n-bit DAC</strong> produces <strong>2<sup>n</sup></strong> discrete output levels.</p>
+          <div class="metric-example">
+            <span>8-bit → 256 levels</span>
+            <span>16-bit → 65,536 levels</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--teal);">DNL</div>
+            <h3>Differential Non-Linearity</h3>
+          </div>
+          <p>The deviation of each <strong>step size</strong> from the ideal 1 LSB. A DNL ≤ ±1 LSB guarantees <strong>monotonicity</strong> — the output never decreases as input increases.</p>
+          <div class="metric-example">
+            <span>Good: ±0.5 LSB</span>
+            <span>Acceptable: ±1 LSB</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--rose);">INL</div>
+            <h3>Integral Non-Linearity</h3>
+          </div>
+          <p>The maximum deviation of the <strong>overall transfer curve</strong> from the ideal straight line. Represents the <strong>cumulative accuracy</strong> across the full range.</p>
+          <div class="metric-example">
+            <span>Precision: ±0.5 LSB</span>
+            <span>General: ±1–2 LSB</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--slate);">ENOB</div>
+            <h3>Effective Number of Bits</h3>
+          </div>
+          <p>The <strong>real-world resolution</strong> after accounting for noise and distortion. A 16-bit DAC might only achieve <strong>14 ENOB</strong> in practice.</p>
+          <div class="metric-example">
+            <span>Formula: ENOB = (SINAD − 1.76) / 6.02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: MEASURING EFFICIENCY ==================== -->
+  <section class="slide" id="slide-9">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">08</span>
+        <h2>Measuring Efficiency</h2>
+      </div>
+      <p class="slide-intro anim-item">Efficiency isn't just about power — it encompasses speed, area, and how much performance you get per watt.</p>
+      <div class="metric-grid">
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--amber);">PWR</div>
+            <h3>Power Consumption</h3>
+          </div>
+          <p>Total power drawn during conversion. Critical for <strong>battery-operated</strong> and IoT devices. Ranges from <strong>microwatts</strong> (low-power) to <strong>hundreds of milliwatts</strong> (high-speed).</p>
+          <div class="metric-example">
+            <span>DAC0808: ~33 mW</span>
+            <span>AD9767: ~380 mW</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--teal);">SPD</div>
+            <h3>Settling Time</h3>
+          </div>
+          <p>Time for output to reach and stay within ±0.5 LSB of the final value. <strong>Faster settling = higher throughput</strong>.</p>
+          <div class="metric-example">
+            <span>High-Speed: 1–100 ns</span>
+            <span>Precision: 1–50 μs</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--rose);">FOM</div>
+            <h3>Figure of Merit</h3>
+          </div>
+          <p>Normalizes performance across designs. <strong>Walden FoM</strong> = Power / (2<sup>ENOB</sup> × f<sub>s</sub>). Lower is better — shows energy per conversion step.</p>
+          <div class="metric-example">
+            <span>State-of-art: &lt;10 fJ/conv</span>
+          </div>
+        </div>
+        <div class="metric-card anim-item">
+          <div class="metric-header">
+            <div class="metric-abbr" style="background: var(--slate);">AREA</div>
+            <h3>Silicon Area</h3>
+          </div>
+          <p>Die area consumed by the DAC circuit. ΣΔ DACs use <strong>less analog area</strong> but more digital. R-2R needs <strong>matched resistor arrays</strong> that consume more space.</p>
+          <div class="metric-example">
+            <span>Trade-off: Analog vs Digital area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: THE TRADE-OFF ==================== -->
+  <section class="slide" id="slide-10">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">09</span>
+        <h2>The Accuracy vs Efficiency Trade-off</h2>
+      </div>
+      <p class="slide-intro anim-item">No single architecture wins everywhere. The choice depends on whether your application prioritizes precision, speed, or low power.</p>
+      <div class="comparison-table-wrap anim-item">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Binary Weighted</th>
+              <th>R-2R Ladder</th>
+              <th>Sigma-Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="param-name">Resolution</td>
+              <td><span class="rating rating-low">4–8 bits</span></td>
+              <td><span class="rating rating-med">8–16 bits</span></td>
+              <td><span class="rating rating-high">16–32 bits</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Accuracy (INL)</td>
+              <td><span class="rating rating-low">±2–4 LSB</span></td>
+              <td><span class="rating rating-med">±0.5–1 LSB</span></td>
+              <td><span class="rating rating-high">±0.5 LSB</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Speed</td>
+              <td><span class="rating rating-high">Very Fast</span></td>
+              <td><span class="rating rating-high">Fast</span></td>
+              <td><span class="rating rating-low">Slow (latency)</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Power</td>
+              <td><span class="rating rating-med">Low–Moderate</span></td>
+              <td><span class="rating rating-med">Moderate</span></td>
+              <td><span class="rating rating-low">Higher (DSP)</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Complexity</td>
+              <td><span class="rating rating-high">Simple</span></td>
+              <td><span class="rating rating-med">Moderate</span></td>
+              <td><span class="rating rating-low">Complex</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Component Matching</td>
+              <td><span class="rating rating-low">Very Difficult</span></td>
+              <td><span class="rating rating-med">Manageable</span></td>
+              <td><span class="rating rating-high">Not Required</span></td>
+            </tr>
+            <tr>
+              <td class="param-name">Cost (High Res)</td>
+              <td><span class="rating rating-low">Impractical</span></td>
+              <td><span class="rating rating-med">Moderate</span></td>
+              <td><span class="rating rating-high">Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight-bar anim-item">
+        <div class="insight-item">
+          <span class="insight-label" style="color: var(--amber);">Best for Speed</span>
+          <span>Binary Weighted / R-2R</span>
+        </div>
+        <div class="insight-divider"></div>
+        <div class="insight-item">
+          <span class="insight-label" style="color: var(--teal);">Best for Accuracy</span>
+          <span>Sigma-Delta</span>
+        </div>
+        <div class="insight-divider"></div>
+        <div class="insight-item">
+          <span class="insight-label" style="color: var(--rose);">Best Balance</span>
+          <span>R-2R Ladder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 11: REAL-WORLD APPLICATIONS ==================== -->
+  <section class="slide" id="slide-11">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">10</span>
+        <h2>Real-World Applications</h2>
+      </div>
+      <div class="app-grid">
+        <div class="app-card anim-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="var(--amber)" stroke-width="1.5">
+              <path d="M8,30 Q14,10 20,20 Q26,30 32,15"/>
+              <rect x="5" y="8" width="30" height="24" rx="3"/>
+            </svg>
+          </div>
+          <h3>Audio Systems</h3>
+          <p><strong>ΣΔ DACs</strong> dominate — smartphones, headphone amps, and studio gear use 24–32 bit converters for high-fidelity playback.</p>
+          <div class="app-example">Example: PCM1794 (24-bit, 192 kHz)</div>
+        </div>
+        <div class="app-card anim-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="var(--teal)" stroke-width="1.5">
+              <rect x="10" y="6" width="20" height="28" rx="3"/>
+              <circle cx="20" cy="30" r="2"/>
+              <line x1="14" y1="10" x2="26" y2="10"/>
+            </svg>
+          </div>
+          <h3>Telecommunications</h3>
+          <p><strong>High-speed R-2R</strong> DACs generate waveforms for 4G/5G base stations, radar, and Software Defined Radio (SDR).</p>
+          <div class="app-example">Example: AD9767 (14-bit, 125 MSPS)</div>
+        </div>
+        <div class="app-card anim-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="var(--rose)" stroke-width="1.5">
+              <circle cx="20" cy="20" r="12"/>
+              <line x1="20" y1="12" x2="20" y2="20"/>
+              <line x1="20" y1="20" x2="26" y2="20"/>
+              <circle cx="20" cy="20" r="2" fill="var(--rose)"/>
+            </svg>
+          </div>
+          <h3>Industrial Control</h3>
+          <p><strong>R-2R or string DACs</strong> drive precision voltage outputs for motor controllers, PLCs, and calibration instruments.</p>
+          <div class="app-example">Monotonicity guaranteed (DNL ≤ ±1 LSB)</div>
+        </div>
+        <div class="app-card anim-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="var(--slate)" stroke-width="1.5">
+              <path d="M10,28 L16,16 L22,22 L28,10 L34,18"/>
+              <line x1="8" y1="32" x2="36" y2="32"/>
+              <line x1="8" y1="10" x2="8" y2="32"/>
+            </svg>
+          </div>
+          <h3>Medical Devices</h3>
+          <p>High-resolution DACs in <strong>imaging systems</strong> (MRI, CT) and waveform generators for patient monitoring and ultrasound.</p>
+          <div class="app-example">Requires both precision + low noise</div>
+        </div>
+      </div>
+      <div class="real-data-bar anim-item">
+        <div class="data-item">
+          <span class="data-label">DAC0808</span>
+          <span class="data-specs">8-bit · ~33 mW · 150 ns settling</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">AD9767</span>
+          <span class="data-specs">14-bit · 380 mW · 125 MSPS</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">PCM1794</span>
+          <span class="data-specs">24-bit · 132 dB DNR · 192 kHz</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 12: SUMMARY ==================== -->
+  <section class="slide" id="slide-12">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">11</span>
+        <h2>Summary & Key Takeaways</h2>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="takeaway-list">
+            <div class="takeaway anim-item">
+              <div class="takeaway-num">1</div>
+              <div>
+                <strong>No perfect DAC exists</strong> — every architecture trades off accuracy against speed, power, and cost.
+              </div>
+            </div>
+            <div class="takeaway anim-item">
+              <div class="takeaway-num">2</div>
+              <div>
+                <strong>Binary Weighted</strong> DACs are simple and fast but impractical beyond low resolutions due to resistor matching.
+              </div>
+            </div>
+            <div class="takeaway anim-item">
+              <div class="takeaway-num">3</div>
+              <div>
+                <strong>R-2R Ladder</strong> DACs offer the best balance — practical to manufacture, scalable, and fast. The workhorse of precision and high-speed applications.
+              </div>
+            </div>
+            <div class="takeaway anim-item">
+              <div class="takeaway-num">4</div>
+              <div>
+                <strong>Sigma-Delta</strong> DACs achieve the highest resolution through digital processing, ideal for audio and low-cost consumer electronics.
+              </div>
+            </div>
+            <div class="takeaway anim-item">
+              <div class="takeaway-num">5</div>
+              <div>
+                <strong>Application requirements</strong> drive the choice: prioritize speed → R-2R, prioritize accuracy → ΣΔ, need simplicity → Binary Weighted.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="ref-card anim-item">
+            <h3>References</h3>
+            <ul class="ref-list">
+              <li>Sedra & Smith — <em>Microelectronic Circuits</em>, Ch. 9</li>
+              <li>Texas Instruments — DAC0808 Datasheet</li>
+              <li>Analog Devices — AD9767 Datasheet</li>
+              <li>TI — PCM1794 Datasheet</li>
+              <li>Microchip — AN795: Voltage Output DACs</li>
+              <li>All About Circuits — DAC Architectures</li>
+            </ul>
+          </div>
+          <div class="end-card anim-item">
+            <div class="end-text">Thank You</div>
+            <div class="end-meta">25CE099 — Megh Rana</div>
+            <div class="end-course">Digital Electronics — CSUC101</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

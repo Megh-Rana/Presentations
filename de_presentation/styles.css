@@ -1,0 +1,1403 @@
+/* ============================================================
+   DESIGN SYSTEM — DAC Presentation
+   ============================================================ */
+
+:root {
+  /* Colors */
+  --bg-deep: #0c1222;
+  --bg-surface: #131b2e;
+  --bg-card: #1a2340;
+  --bg-card-hover: #1f2b4d;
+  --border: #2a3555;
+  --border-light: #354168;
+
+  --text: #e8ecf4;
+  --text-dim: #8896b3;
+  --text-muted: #5a6a8a;
+
+  --amber: #e8a230;
+  --amber-dim: rgba(232, 162, 48, 0.15);
+  --teal: #38b2a0;
+  --teal-dim: rgba(56, 178, 160, 0.12);
+  --rose: #d06878;
+  --rose-dim: rgba(208, 104, 120, 0.12);
+  --slate: #6882a8;
+  --slate-dim: rgba(104, 130, 168, 0.12);
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --slide-pad: 56px;
+  --slide-pad-right: 240px; /* camera zone */
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg-deep);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--bg-card);
+  z-index: 100;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 8.33%;
+  background: var(--amber);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   SLIDE COUNTER
+   ============================================================ */
+
+.slide-counter {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  z-index: 100;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   NAV HINT
+   ============================================================ */
+
+.nav-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 11px;
+  color: var(--text-muted);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.nav-hint.hidden {
+  opacity: 0;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+}
+
+/* ============================================================
+   SLIDE LAYOUT
+   ============================================================ */
+
+.slide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: none;
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+.slide.entering {
+  animation: slideEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.slide.exiting {
+  animation: slideExit 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  z-index: 5;
+}
+
+@keyframes slideEnter {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+.slide.entering-reverse {
+  animation: slideEnterReverse 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.slide.exiting-reverse {
+  animation: slideExitReverse 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  z-index: 5;
+}
+
+@keyframes slideEnterReverse {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideExitReverse {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+.slide-content {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: var(--slide-pad);
+  padding-right: var(--slide-pad-right);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* ============================================================
+   ANIMATED ITEMS
+   ============================================================ */
+
+.anim-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: none;
+}
+
+.slide.active .anim-item {
+  animation: itemReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.slide.active .anim-item:nth-child(1) { animation-delay: 0.08s; }
+.slide.active .anim-item:nth-child(2) { animation-delay: 0.16s; }
+.slide.active .anim-item:nth-child(3) { animation-delay: 0.24s; }
+.slide.active .anim-item:nth-child(4) { animation-delay: 0.32s; }
+.slide.active .anim-item:nth-child(5) { animation-delay: 0.40s; }
+.slide.active .anim-item:nth-child(6) { animation-delay: 0.48s; }
+.slide.active .anim-item:nth-child(7) { animation-delay: 0.56s; }
+
+/* Deep nested anim-items */
+.slide.active .col-left .anim-item:nth-child(1) { animation-delay: 0.12s; }
+.slide.active .col-left .anim-item:nth-child(2) { animation-delay: 0.22s; }
+.slide.active .col-left .anim-item:nth-child(3) { animation-delay: 0.32s; }
+.slide.active .col-right .anim-item:nth-child(1) { animation-delay: 0.18s; }
+.slide.active .col-right .anim-item:nth-child(2) { animation-delay: 0.30s; }
+.slide.active .col-right .anim-item:nth-child(3) { animation-delay: 0.42s; }
+
+.slide.active .metric-grid .anim-item:nth-child(1) { animation-delay: 0.1s; }
+.slide.active .metric-grid .anim-item:nth-child(2) { animation-delay: 0.2s; }
+.slide.active .metric-grid .anim-item:nth-child(3) { animation-delay: 0.3s; }
+.slide.active .metric-grid .anim-item:nth-child(4) { animation-delay: 0.4s; }
+
+.slide.active .three-cards .anim-item:nth-child(1) { animation-delay: 0.15s; }
+.slide.active .three-cards .anim-item:nth-child(2) { animation-delay: 0.28s; }
+.slide.active .three-cards .anim-item:nth-child(3) { animation-delay: 0.41s; }
+
+.slide.active .app-grid .anim-item:nth-child(1) { animation-delay: 0.1s; }
+.slide.active .app-grid .anim-item:nth-child(2) { animation-delay: 0.2s; }
+.slide.active .app-grid .anim-item:nth-child(3) { animation-delay: 0.3s; }
+.slide.active .app-grid .anim-item:nth-child(4) { animation-delay: 0.4s; }
+
+.slide.active .takeaway-list .anim-item:nth-child(1) { animation-delay: 0.08s; }
+.slide.active .takeaway-list .anim-item:nth-child(2) { animation-delay: 0.16s; }
+.slide.active .takeaway-list .anim-item:nth-child(3) { animation-delay: 0.24s; }
+.slide.active .takeaway-list .anim-item:nth-child(4) { animation-delay: 0.32s; }
+.slide.active .takeaway-list .anim-item:nth-child(5) { animation-delay: 0.40s; }
+
+@keyframes itemReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.title-slide {
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0;
+}
+
+.title-decoration {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  display: flex;
+  gap: 8px;
+}
+
+.deco-line {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--amber);
+}
+
+.deco-line-1 { height: 40px; opacity: 0.4; }
+.deco-line-2 { height: 28px; opacity: 0.6; }
+.deco-line-3 { height: 16px; opacity: 0.8; }
+
+.title-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--amber);
+  background: var(--amber-dim);
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 162, 48, 0.2);
+  margin-bottom: 28px;
+}
+
+.main-title {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
+}
+
+.title-line-1 {
+  display: block;
+  color: var(--text);
+}
+
+.title-line-2 {
+  display: block;
+  color: var(--amber);
+}
+
+.title-subtitle {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+}
+
+.title-divider {
+  width: 64px;
+  height: 2px;
+  background: var(--border-light);
+  margin-bottom: 24px;
+}
+
+.title-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 48px;
+}
+
+.meta-label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.meta-dot {
+  color: var(--border-light);
+}
+
+.title-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.icon-chip {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SLIDE HEADER
+   ============================================================ */
+
+.slide-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.slide-number {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--amber);
+  opacity: 0.6;
+}
+
+.slide-header h2 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.slide-intro {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 680px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   TWO COLUMN LAYOUT
+   ============================================================ */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  flex: 1;
+  align-items: start;
+}
+
+.col-left, .col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--amber);
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.card p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.card p + p {
+  margin-top: 8px;
+}
+
+.card p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.card-warn h3 {
+  color: var(--rose);
+}
+
+/* ============================================================
+   HIGHLIGHT BOX
+   ============================================================ */
+
+.highlight-box {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 162, 48, 0.18);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.highlight-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ============================================================
+   BLOCK DIAGRAM (Slide 2)
+   ============================================================ */
+
+.diagram-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block-diagram {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.block-input, .block-output {
+  text-align: center;
+}
+
+.signal-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.binary-stream {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.bit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 162, 48, 0.3);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--amber);
+  animation: bitPulse 2s ease-in-out infinite;
+}
+
+.bit:nth-child(1) { animation-delay: 0s; }
+.bit:nth-child(2) { animation-delay: 0.3s; }
+.bit:nth-child(3) { animation-delay: 0.6s; }
+.bit:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes bitPulse {
+  0%, 100% { border-color: rgba(232, 162, 48, 0.2); }
+  50% { border-color: rgba(232, 162, 48, 0.6); }
+}
+
+.dac-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 56px;
+  background: var(--bg-surface);
+  border: 2px solid var(--amber);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 2px;
+}
+
+.wave-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawWave 2s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.slide.active .wave-path {
+  animation: drawWave 2s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes drawWave {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================
+   FORMULA CARD
+   ============================================================ */
+
+.formula-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.formula-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.formula {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: 0.5px;
+}
+
+.formula sub {
+  font-size: 10px;
+}
+
+.formula sup {
+  font-size: 10px;
+}
+
+.formula-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   STEP LIST
+   ============================================================ */
+
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 162, 48, 0.25);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.step-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding-top: 3px;
+}
+
+.step-text strong {
+  color: var(--text);
+}
+
+/* ============================================================
+   STAIRCASE DIAGRAM (Slide 3)
+   ============================================================ */
+
+.staircase-title {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.staircase-path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+
+.slide.active .staircase-path {
+  animation: drawStaircase 1.8s ease-in-out forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes drawStaircase {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.info-tag {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--teal-dim);
+  border: 1px solid rgba(56, 178, 160, 0.18);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.info-tag strong {
+  color: var(--text);
+}
+
+.tag-label {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--teal);
+  background: rgba(56, 178, 160, 0.12);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   THREE CARDS (Slide 4)
+   ============================================================ */
+
+.three-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+  align-items: start;
+}
+
+.arch-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 20px;
+  border-top: 3px solid var(--card-accent);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.arch-icon {
+  margin-bottom: 16px;
+}
+
+.arch-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.arch-card p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.arch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.tag-pro {
+  color: var(--teal);
+  background: var(--teal-dim);
+  border: 1px solid rgba(56, 178, 160, 0.15);
+}
+
+.tag-con {
+  color: var(--rose);
+  background: var(--rose-dim);
+  border: 1px solid rgba(208, 104, 120, 0.15);
+}
+
+/* ============================================================
+   CIRCUIT SVGs (Slides 5, 6)
+   ============================================================ */
+
+.circuit-svg text {
+  user-select: none;
+}
+
+.circuit-svg line,
+.circuit-svg rect,
+.circuit-svg polygon {
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================================
+   COMPARISON MINI (Slides 6, 7)
+   ============================================================ */
+
+.comparison-mini {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.cmp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.cmp-row:last-child {
+  border-bottom: none;
+}
+
+.cmp-label {
+  color: var(--text-dim);
+}
+
+.cmp-value {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.cmp-good {
+  color: var(--teal);
+}
+
+.cmp-warn {
+  color: var(--amber);
+}
+
+/* ============================================================
+   SIGMA-DELTA FLOW (Slide 7)
+   ============================================================ */
+
+.sd-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.sd-block {
+  text-align: center;
+}
+
+.sd-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 52px;
+  padding: 6px 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.sd-highlight {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: var(--teal-dim);
+}
+
+.sd-note {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.sd-arrow {
+  font-size: 18px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+}
+
+/* ============================================================
+   METRIC GRID (Slides 8, 9)
+   ============================================================ */
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  align-items: start;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.metric-abbr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 24px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--bg-deep);
+  letter-spacing: 1px;
+}
+
+.metric-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.metric-card p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.metric-card p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.metric-example {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.metric-example span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* ============================================================
+   COMPARISON TABLE (Slide 10)
+   ============================================================ */
+
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.comparison-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border);
+  background: var(--bg-card);
+}
+
+.comparison-table thead th:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+.comparison-table thead th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.comparison-table tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tbody tr {
+  background: var(--bg-surface);
+  transition: background 0.15s ease;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: var(--bg-card);
+}
+
+.param-name {
+  font-weight: 600;
+  color: var(--text) !important;
+  font-size: 12px;
+}
+
+.rating {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.rating-high {
+  color: var(--teal);
+  background: var(--teal-dim);
+}
+
+.rating-med {
+  color: var(--amber);
+  background: var(--amber-dim);
+}
+
+.rating-low {
+  color: var(--rose);
+  background: var(--rose-dim);
+}
+
+/* ============================================================
+   INSIGHT BAR (Slide 10)
+   ============================================================ */
+
+.insight-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 28px;
+}
+
+.insight-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.insight-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.insight-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+}
+
+/* ============================================================
+   APP GRID (Slide 11)
+   ============================================================ */
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.app-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 16px;
+}
+
+.app-icon {
+  margin-bottom: 12px;
+}
+
+.app-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.app-card p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.app-card p strong {
+  color: var(--text);
+}
+
+.app-example {
+  margin-top: 10px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.real-data-bar {
+  display: flex;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 20px;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.data-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--amber);
+}
+
+.data-specs {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   TAKEAWAY LIST (Slide 12)
+   ============================================================ */
+
+.takeaway-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.takeaway {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.takeaway-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 162, 48, 0.2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.takeaway div:last-child {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  padding-top: 4px;
+}
+
+.takeaway strong {
+  color: var(--text);
+}
+
+/* ============================================================
+   REFERENCES CARD (Slide 12)
+   ============================================================ */
+
+.ref-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.ref-card h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--amber);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ref-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ref-list li {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.ref-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--border-light);
+}
+
+.ref-list em {
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   END CARD (Slide 12)
+   ============================================================ */
+
+.end-card {
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 162, 48, 0.2);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.end-text {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--amber);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.end-meta {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.end-course {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   CAMERA ZONE INDICATOR (subtle, dev only)
+   ============================================================ */
+
+/* Uncomment to visualize camera zone:
+.slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  height: 200px;
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 50;
+}
+*/
+
+/* ============================================================
+   SVG DRAW ANIMATIONS
+   ============================================================ */
+
+.circuit-svg rect,
+.circuit-svg line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+
+.slide.active .circuit-svg rect,
+.slide.active .circuit-svg line {
+  animation: drawLine 0.8s ease-out forwards;
+}
+
+.slide.active .circuit-svg rect:nth-child(1),
+.slide.active .circuit-svg line:nth-child(1) { animation-delay: 0.1s; }
+.slide.active .circuit-svg rect:nth-child(2),
+.slide.active .circuit-svg line:nth-child(2) { animation-delay: 0.15s; }
+.slide.active .circuit-svg rect:nth-child(3),
+.slide.active .circuit-svg line:nth-child(3) { animation-delay: 0.2s; }
+.slide.active .circuit-svg rect:nth-child(4),
+.slide.active .circuit-svg line:nth-child(4) { animation-delay: 0.25s; }
+.slide.active .circuit-svg rect:nth-child(5),
+.slide.active .circuit-svg line:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================
+   PARTICLE BACKGROUND
+   ============================================================ */
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.15;
+  animation: floatParticle 20s linear infinite;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.15; }
+  100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
+}
