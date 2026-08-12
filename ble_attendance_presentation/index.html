@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLE Smart Attendance — iCreate Project Proposal</title>
+  <meta name="description" content="BLE Smart Attendance: A mobile attendance system using Bluetooth Low Energy proximity detection and face recognition verification. iCreate Funding Proposal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Slide Counter -->
+  <div class="slide-counter" id="slideCounter">1 / 12</div>
+
+  <!-- Navigation Hints -->
+  <div class="nav-hint" id="navHint">
+    <span class="key">←</span> <span class="key">→</span> to navigate
+  </div>
+
+  <!-- ==================== SLIDE 1: TITLE ==================== -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-content title-slide">
+      <div class="title-decoration">
+        <div class="deco-line deco-line-1"></div>
+        <div class="deco-line deco-line-2"></div>
+        <div class="deco-line deco-line-3"></div>
+      </div>
+
+      <!-- BLE Signal Rings -->
+      <div class="title-ble-rings">
+        <div class="ble-ring"></div>
+        <div class="ble-ring"></div>
+        <div class="ble-ring"></div>
+        <div class="ble-ring"></div>
+        <div class="ble-ring-center">
+          <svg viewBox="0 0 24 24"><path d="M12 2L7 7l5 5-5 5 5 5 5-5-5-5 5-5z"/></svg>
+        </div>
+      </div>
+
+      <div class="title-badge anim-item">iCreate Funding Proposal</div>
+      <h1 class="main-title anim-item">
+        <span class="title-line-1">BLE Smart</span>
+        <span class="title-line-2">Attendance</span>
+      </h1>
+      <div class="title-subtitle anim-item">A mobile attendance system using BLE proximity detection and face recognition to make marking attendance faster, easier, and tamper-proof — without any extra hardware.</div>
+      <div class="title-divider anim-item"></div>
+      <div class="title-meta anim-item">
+        <span class="meta-label">Team Project</span>
+        <span class="meta-dot">·</span>
+        <span class="meta-value">Megh Rana · Kushagra Upadhyay · Moksh Raval</span>
+      </div>
+      <div class="title-footer anim-item">
+        <svg class="icon-ble" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6.5 6.5l11 11M6.5 17.5l11-11M12 2v20"/>
+        </svg>
+        <span>CHARUSAT · U & P U Patel Dept. of Computer Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: THE PROBLEM ==================== -->
+  <section class="slide" id="slide-2">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">01</span>
+        <h2>The Problem</h2>
+      </div>
+      <p class="slide-intro anim-item">Attendance in colleges today is still handled through slow, manual, or easily-gamed methods. The core issue is that <strong>the process wastes valuable class time, burdens instructors and students, and digital alternatives introduce their own problems.</strong></p>
+      <div class="four-cards">
+        <div class="problem-card anim-item" style="--card-accent: var(--amber);">
+          <div class="problem-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--amber)" stroke-width="1.5"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3>Roll Call</h3>
+          <p>The most common method. It works, but it's <strong>time-consuming</strong> — every lecture loses several minutes to calling out names or roll numbers. There's also a small chance a student's response goes unheard. The major flaw is purely time.</p>
+          <div class="problem-tag tag-slow">Time Wasted</div>
+        </div>
+        <div class="problem-card anim-item" style="--card-accent: var(--rose);">
+          <div class="problem-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--rose)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 20c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5"/></svg>
+          </div>
+          <h3>Face Scanning Hardware</h3>
+          <p>Automated face scanning solves the time problem, but requires <strong>dedicated cameras and an entire setup to be installed in every classroom</strong> — expensive to deploy and maintain at scale.</p>
+          <div class="problem-tag tag-cost">Costly Hardware</div>
+        </div>
+        <div class="problem-card anim-item" style="--card-accent: var(--violet);">
+          <div class="problem-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--violet)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h3v3H7zM14 7h3v3h-3zM7 14h3v3H7z"/></svg>
+          </div>
+          <h3>QR Code Systems</h3>
+          <p>Faster than roll call, but a QR code or its screenshot can be <strong>shared or forwarded</strong> — enabling proxy attendance with zero physical presence required.</p>
+          <div class="problem-tag tag-spoof">Spoofable</div>
+        </div>
+        <div class="problem-card anim-item" style="--card-accent: var(--blue);">
+          <div class="problem-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--blue)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Biometric Kiosks</h3>
+          <p>Require dedicated hardware at fixed points, expensive to deploy at scale, and create <strong>bottlenecks and queues</strong> at entry points.</p>
+          <div class="problem-tag tag-cost">Costly & Bottleneck</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: THE SOLUTION ==================== -->
+  <section class="slide" id="slide-3">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">02</span>
+        <h2>The Solution</h2>
+      </div>
+      <p class="slide-intro anim-item">BLE Smart Attendance combines <strong>two signals</strong> that together are hard to fake and easy to use — solving both speed and integrity at once.</p>
+      <div class="solution-signals anim-item">
+        <div class="signal-card" style="--signal-color: var(--cyan);">
+          <div class="signal-icon-wrap" style="background: var(--cyan-dim); border: 1px solid rgba(34,211,238,0.2);">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--cyan)" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+          </div>
+          <div class="signal-subtitle">Signal 1</div>
+          <h3>BLE Proximity</h3>
+          <p>The student's phone must be <strong>physically near</strong> the instructor's phone (acting as a BLE beacon). The app continuously verifies presence using <strong>rotating tokens</strong> — the student must stay in range for at least 75% of the class duration.</p>
+        </div>
+        <div class="signal-plus">+</div>
+        <div class="signal-card" style="--signal-color: var(--blue);">
+          <div class="signal-icon-wrap" style="background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.2);">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--blue)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 20c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5"/></svg>
+          </div>
+          <div class="signal-subtitle">Signal 2</div>
+          <h3>Face Recognition</h3>
+          <p>At the end of the lecture, the student verifies their identity using <strong>face recognition</strong> on their own device. This confirms the phone in proximity was actually used by its owner throughout the session.</p>
+        </div>
+      </div>
+      <div class="signal-result anim-item">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--cyan)" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div><strong>Two-factor attendance:</strong> Continuous presence + identity verification. The design makes faking attendance <strong>inherently harder than just being present</strong> — proxy prevention is a natural side effect of good design, not aggressive policing.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: WHY IT MATTERS ==================== -->
+  <section class="slide" id="slide-4">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">03</span>
+        <h2>Why This Matters</h2>
+      </div>
+      <p class="slide-intro anim-item">The biggest win here is <strong>time</strong>. The entire attendance process becomes invisible — it happens automatically while teaching continues uninterrupted.</p>
+      <div class="benefit-grid">
+        <div class="benefit-card anim-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+          </div>
+          <h3>For Students</h3>
+          <p>No more splitting attention between the lecture and waiting for your roll number to be called. No more saying "present" each time. <strong>Attendance happens silently in the background</strong> while students focus entirely on learning.</p>
+        </div>
+        <div class="benefit-card anim-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--blue)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>For Instructors</h3>
+          <p>No manual headcount, no calling out names or roll numbers, and <strong>no responsibility to manage attendance at all</strong>. It records automatically. At the end of the day, just download and upload to eGovernance whenever convenient — <strong>with one-click Excel export</strong>.</p>
+        </div>
+        <div class="benefit-card anim-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--teal)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>For Admins</h3>
+          <p><strong>Real-time dashboard</strong> instead of end-of-week Excel compilation. Instant exportable records, searchable history, and live session monitoring. No more manual data entry or transcription errors.</p>
+        </div>
+      </div>
+      <div class="secondary-benefit anim-item">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div><strong>Zero responsibility on anyone:</strong> Neither student nor teacher has to actively "take" attendance. The system handles it completely in the background — the only manual step is the face scan at finalization, which takes seconds.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: HOW IT WORKS ==================== -->
+  <section class="slide" id="slide-5">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">04</span>
+        <h2>How It Works</h2>
+      </div>
+      <p class="slide-intro anim-item">A one-time login setup on both ends. After that, the app just needs to be opened at the start of the day — everything else is automatic.</p>
+      <div class="step-flow">
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">1</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"/></svg>
+          </span>
+          <h3>Teacher Starts Session</h3>
+          <p>Teacher opens the app, selects the session from the list, and taps start. The phone begins broadcasting a BLE signal.</p>
+        </div>
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">2</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+          <h3>Auto-Scanning Begins</h3>
+          <p>Students have the app running in the background. It automatically detects the BLE signal — no manual scanning needed. Attendance tracking starts silently.</p>
+        </div>
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">3</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+          </span>
+          <h3>Continuous Verification</h3>
+          <p>The app keeps rotating tokens throughout the lecture, verifying the student stays in range. Must be present for <strong>&gt;75% of class duration</strong>.</p>
+        </div>
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">4</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          <h3>Teacher Finalizes</h3>
+          <p>Lecture ends. Teacher presses "Finalize Attendance" — eligible students (&gt;75% presence) get the option to finalize on their phones.</p>
+        </div>
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">5</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 20c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5"/></svg>
+          </span>
+          <h3>Face Scan & Confirm</h3>
+          <p>Students tap finalize, scan their face through the app. Identity verified — marked present. Takes a few seconds per student.</p>
+        </div>
+        <div class="step-flow-card anim-item">
+          <div class="step-flow-num">6</div>
+          <span class="step-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </span>
+          <h3>Session Ends & Uploads</h3>
+          <p>Teacher clicks "End Session." Attendance uploads to the server instantly. Accessible via the web dashboard and exportable to Excel.</p>
+        </div>
+      </div>
+      <div class="step-flow-time anim-item">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        &nbsp;One-time setup · Background operation · Face scan only at end
+        <span>· Zero class disruption</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: LIVE DEMO ==================== -->
+  <section class="slide" id="slide-6">
+    <div class="slide-content demo-slide">
+      <div class="demo-icon-wrap anim-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="3"/>
+          <line x1="12" y1="18" x2="12" y2="18.01"/>
+        </svg>
+      </div>
+      <div class="demo-title anim-item">Live Demo</div>
+      <div class="demo-subtitle anim-item">BLE broadcasting, proximity detection, face recognition, and real-time dashboard — demonstrated end-to-end on physical devices.</div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: SYSTEM ARCHITECTURE ==================== -->
+  <section class="slide" id="slide-7">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">05</span>
+        <h2>System Architecture</h2>
+      </div>
+      <div class="arch-grid anim-item">
+        <div class="arch-card" style="--card-accent: var(--cyan);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--cyan)" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+          </div>
+          <h3>Mobile App</h3>
+          <div class="arch-tech">Flutter</div>
+          <p>Cross-platform. Used by students and instructors. Android primary; iOS in development.</p>
+        </div>
+        <div class="arch-card" style="--card-accent: var(--blue);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--blue)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Backend API</h3>
+          <div class="arch-tech">FastAPI · Python</div>
+          <p>Session creation, BLE tokens, attendance submission, auth, and validation.</p>
+        </div>
+        <div class="arch-card" style="--card-accent: var(--teal);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--teal)" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Database</h3>
+          <div class="arch-tech">PostgreSQL</div>
+          <p>Users, sessions, attendance records, and institution metadata.</p>
+        </div>
+        <div class="arch-card" style="--card-accent: var(--violet);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--violet)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>Admin Dashboard</h3>
+          <div class="arch-tech">React · Vite · TypeScript</div>
+          <p>Real-time view, filter, and export attendance data. Hosted on Vercel.</p>
+        </div>
+        <div class="arch-card" style="--card-accent: var(--emerald);">
+          <div class="arch-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--emerald)" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>CI/CD Pipeline</h3>
+          <div class="arch-tech">GitHub Actions</div>
+          <p>Automated building, signing, and versioning of Android APKs per release.</p>
+        </div>
+      </div>
+
+      <!-- Data Flow -->
+      <div class="flow-diagram anim-item">
+        <div class="flow-node">Student App</div>
+        <div class="flow-arrow flow-arrow-ble">⇄ BLE ⇄</div>
+        <div class="flow-node">Instructor App</div>
+        <div class="flow-arrow">↘</div>
+        <div class="flow-node flow-node-highlight">FastAPI Backend</div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-node">PostgreSQL</div>
+      </div>
+      <div class="flow-diagram anim-item" style="margin-top: -8px;">
+        <div class="flow-node">Student App</div>
+        <div class="flow-arrow">↗</div>
+        <div class="flow-node flow-node-highlight">FastAPI Backend</div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-node">React Dashboard</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: BENCHMARK ==================== -->
+  <section class="slide" id="slide-8">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">06</span>
+        <h2>How This Is Better</h2>
+      </div>
+      <p class="slide-intro anim-item">Compared to existing approaches, BLE + face recognition simultaneously binds attendance to a <strong>specific physical location</strong> and a <strong>specific verified identity</strong> — using only phones.</p>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="card anim-item">
+            <h3>vs. RFID / Card Systems</h3>
+            <p>Cards can be <strong>shared or swiped by anyone</strong> — no identity verification. BLE + face recognition binds the check-in to the actual person, not a transferable token.</p>
+          </div>
+          <div class="card card-violet anim-item">
+            <h3>vs. QR Code Systems</h3>
+            <p>QR codes are <strong>trivially screenshot-able and forwardable</strong>. Our system requires physical BLE proximity (can't be forwarded) + live face recognition (can't be faked with a photo).</p>
+          </div>
+          <div class="card card-teal anim-item">
+            <h3>vs. Face Scanning Hardware</h3>
+            <p>Classroom face scanners require <strong>dedicated cameras in every room</strong> — expensive to install and maintain. We use the phones students already carry — <strong>zero additional hardware cost</strong>.</p>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="card card-blue anim-item">
+            <h3>Active Development with Proven Results</h3>
+            <p>The concept is proven and working — we've had <strong>good initial success</strong> with the Android build, a live CI/CD pipeline, and a functional end-to-end flow. We are actively developing and iterating, and need funding to <strong>test at scale</strong> across a real student body.</p>
+          </div>
+          <div class="highlight-box anim-item">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>Two-factor defense:</strong> To fake attendance, a proxy would need to remain in BLE range for 75% of the lecture AND defeat live face recognition at finalization. This makes proxy attendance near-impossible without simultaneous device and face spoofing.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: STATUS & ROADMAP ==================== -->
+  <section class="slide" id="slide-9">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">07</span>
+        <h2>Current Status & Roadmap</h2>
+      </div>
+      <div class="status-grid">
+        <div class="col-left">
+          <div class="status-section anim-item">
+            <h3 style="color: var(--emerald);"><span class="status-dot dot-done"></span>Built</h3>
+            <ul class="status-list">
+              <li>Android app — BLE proximity + face recognition flow</li>
+              <li>FastAPI backend — session management, attendance recording, auth</li>
+              <li>PostgreSQL database — users, sessions, attendance records</li>
+              <li>React admin dashboard — real-time view, filter, and export</li>
+              <li>Automated Android CI/CD — GitHub Actions, signed arm64 APKs</li>
+            </ul>
+          </div>
+          <div class="status-section anim-item">
+            <h3 style="color: var(--amber);"><span class="status-dot dot-progress"></span>In Progress</h3>
+            <ul class="status-list in-progress">
+              <li>iOS native BLE peripheral integration (Swift/Xcode)</li>
+              <li>iOS build pipeline and App Store submission</li>
+              <li>Large-scale field testing across student body</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="milestone-table-wrap anim-item">
+            <table class="milestone-table">
+              <thead>
+                <tr>
+                  <th>Milestone</th>
+                  <th>Hours</th>
+                  <th>Timeline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Android build finalization & internal testing</td>
+                  <td style="color: var(--text); font-weight: 600;">40</td>
+                  <td><span style="color: var(--cyan);">Month 1</span></td>
+                </tr>
+                <tr>
+                  <td>iOS BLE integration completion & testing</td>
+                  <td style="color: var(--text); font-weight: 600;">80</td>
+                  <td><span style="color: var(--cyan);">Month 2</span></td>
+                </tr>
+                <tr>
+                  <td>Google Play Store submission</td>
+                  <td style="color: var(--text); font-weight: 600;">10</td>
+                  <td><span style="color: var(--cyan);">Month 2</span></td>
+                </tr>
+                <tr>
+                  <td>Apple Developer enrollment & App Store submission</td>
+                  <td style="color: var(--text); font-weight: 600;">10</td>
+                  <td><span style="color: var(--cyan);">Month 3</span></td>
+                </tr>
+                <tr>
+                  <td>Large-scale field testing (Android + iOS)</td>
+                  <td style="color: var(--text); font-weight: 600;">30</td>
+                  <td><span style="color: var(--cyan);">Month 3–4</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: FUNDING ASK ==================== -->
+  <section class="slide" id="slide-10">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">08</span>
+        <h2>Funding Ask</h2>
+      </div>
+      <div class="funding-grid">
+        <div class="col-left">
+          <div class="funding-table-wrap anim-item">
+            <table class="funding-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Purpose</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color: var(--text); font-weight: 500;">Google Play Console</td>
+                  <td>One-time developer registration</td>
+                  <td style="font-family: var(--font-mono); color: var(--cyan);">₹2,500</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--text); font-weight: 500;">Apple Developer Program</td>
+                  <td>Annual membership (Year 1)</td>
+                  <td style="font-family: var(--font-mono); color: var(--cyan);">₹9,900</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--text); font-weight: 700;">Total</td>
+                  <td></td>
+                  <td style="font-family: var(--font-mono); font-weight: 700; color: var(--cyan);">₹12,400</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="funding-total anim-item">
+            <div class="funding-total-label">Total Funding Requested</div>
+            <div class="funding-total-amount">₹12,400</div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="funding-justification anim-item">
+            <h3>Why This Matters</h3>
+            <ul class="justification-list">
+              <li>
+                <div class="justification-num">1</div>
+                <div><strong>Zero hardware cost</strong> — the entire system runs on phones people already own. The only costs are platform registration fees needed to distribute the app.</div>
+              </li>
+              <li>
+                <div class="justification-num">2</div>
+                <div><strong>Concept proven working</strong> — the end-to-end flow has been validated. Funding enables us to publish and test at scale with real students.</div>
+              </li>
+              <li>
+                <div class="justification-num">3</div>
+                <div><strong>Scalable rollout plan</strong> — once deployed, we can test across classes, then across the entire CE department, hand it over to CSPIT, and eventually CHARUSAT can adopt the app institution-wide.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 11: TEAM & MENTOR ==================== -->
+  <section class="slide" id="slide-11">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">09</span>
+        <h2>Team & Mentor</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card anim-item">
+          <div class="team-avatar">KU</div>
+          <h3>Kushagra Upadhyay</h3>
+          <div class="team-roll">25CE127</div>
+          <div class="team-email">25CE127@charusat.edu.in</div>
+        </div>
+        <div class="team-card anim-item">
+          <div class="team-avatar">MR</div>
+          <h3>Megh Rana</h3>
+          <div class="team-roll">25CE099</div>
+          <div class="team-email">25CE099@charusat.edu.in</div>
+        </div>
+        <div class="team-card anim-item">
+          <div class="team-avatar">MR</div>
+          <h3>Moksh Raval</h3>
+          <div class="team-roll">25CE101</div>
+          <div class="team-email">25CE101@charusat.edu.in</div>
+        </div>
+      </div>
+      <div class="mentor-card anim-item">
+        <div class="mentor-avatar">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--bg-deep)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="mentor-info">
+          <h3>Prof. Trusha Patel</h3>
+          <div class="mentor-dept">U & P U Patel Department of Computer Engineering, CHARUSAT</div>
+          <div class="mentor-contact">trushagajjar.ce@charusat.ac.in · 9624699433</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 12: THANK YOU ==================== -->
+  <section class="slide" id="slide-12">
+    <div class="slide-content end-slide">
+      <div class="end-icon anim-item">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--cyan)" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+      </div>
+      <div class="end-title anim-item">Thank You</div>
+      <div class="end-subtitle anim-item">BLE Smart Attendance — making attendance faster, easier, and tamper-proof.</div>
+      <a class="end-repo anim-item" href="https://github.com/Smart-Attendance-Project/BLE_Attendance" target="_blank">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+        </svg>
+        github.com/Smart-Attendance-Project/BLE_Attendance
+      </a>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
