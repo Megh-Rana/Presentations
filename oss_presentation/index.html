@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Potato Phones to Pull Requests — Open Source & Linux Journey</title>
+  <meta name="description" content="A speech and presentation by Megh Rana on Linux, breaking systems, the AOSP rabbit hole, and making meaningful open source contributions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Top Control Bar -->
+  <div class="top-bar">
+    <div class="slide-counter" id="slideCounter">1 / 13</div>
+    <button class="control-btn" id="btnOverview" title="Slide Overview (O)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+    </button>
+    <button class="control-btn" id="btnFullscreen" title="Toggle Fullscreen (F)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navigation Hints -->
+  <div class="nav-hint" id="navHint">
+    <span class="key">←</span> <span class="key">→</span> or <span class="key">Space</span> to navigate · <span class="key">O</span> for overview · <span class="key">F</span> for fullscreen
+  </div>
+
+  <!-- Quick Floating Arrows -->
+  <div class="quick-nav">
+    <button class="nav-arrow-btn" id="btnPrev" title="Previous Slide" disabled>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="nav-arrow-btn" id="btnNext" title="Next Slide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ==================== SLIDE 1: TITLE HERO ==================== -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-content title-slide">
+      <div class="hero-matrix-bg"></div>
+
+      <div class="title-badge anim-item">
+        <span class="status-dot"></span>
+        <span>Open Source & Linux Keynote</span>
+      </div>
+
+      <h1 class="main-title anim-item">
+        From Potato Phones<br>
+        <span class="gradient-text-emerald">to Pull Requests</span>
+      </h1>
+
+      <p class="title-subtitle anim-item">
+        A journey through daily-driving Linux, breaking systems, the AOSP rabbit hole, and making meaningful open source contributions that solve real problems.
+      </p>
+
+      <div class="title-divider anim-item"></div>
+
+      <div class="title-meta anim-item">
+        <span class="meta-pill">Speaker: <span class="speaker-name">Megh Rana</span></span>
+        <span class="meta-pill">25CE099 · Computer Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: QUESTION 1 ==================== -->
+  <section class="slide" id="slide-2">
+    <div class="slide-content question-slide">
+      <div class="question-badge anim-item">
+        <span class="question-tag">Audience Question</span>
+      </div>
+
+      <h2 class="question-title anim-item">
+        How many of you know what<br>
+        <span class="gradient-text-emerald">"Year of the Linux Desktop"</span> is?
+      </h2>
+
+      <p class="question-subtitle anim-item">
+        Raise your hands if you have encountered this phrase or meme in tech discussions.
+      </p>
+
+      <div class="question-box anim-item">
+        <div class="question-icon">?</div>
+        <div class="question-hint">
+          <strong>The Recurring Hope:</strong> Every year since the early 2000s, tech enthusiasts have predicted that Linux would finally surpass Windows and macOS for mainstream consumers.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: THE DESKTOP PARADOX ==================== -->
+  <section class="slide" id="slide-3">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">01</span>
+        <h2>The "Year of the Linux Desktop" Paradox</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        While Linux quietly conquered <strong>100% of top 500 supercomputers, 90% of cloud servers, and 3+ billion Android devices</strong>, the consumer desktop remains trapped in a circular loop:
+      </p>
+
+      <div class="paradox-container anim-item">
+        <div class="cycle-diagram">
+          <div class="cycle-node">
+            <div class="cycle-num">1</div>
+            <div class="cycle-text">Low Consumer Desktop Market Share (~4-5%)</div>
+          </div>
+          <div class="cycle-arrow">↓</div>
+          <div class="cycle-node">
+            <div class="cycle-num">2</div>
+            <div class="cycle-text">Software Vendors (Adobe, Anti-cheat Games) Skip Linux</div>
+          </div>
+          <div class="cycle-arrow">↓</div>
+          <div class="cycle-node">
+            <div class="cycle-num">3</div>
+            <div class="cycle-text">Hardware OEMs Refuse to Pre-Install Linux on Laptops</div>
+          </div>
+          <div class="cycle-arrow">↓</div>
+          <div class="cycle-node">
+            <div class="cycle-num">4</div>
+            <div class="cycle-text">General Public Remains Locked into Proprietary Defaults</div>
+          </div>
+        </div>
+
+        <div class="highlight-callout">
+          <div class="callout-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span>The Circular Chicken-and-Egg Trap</span>
+          </div>
+          <p class="callout-body">
+            Users don't switch because proprietary software isn't ported. Software isn't ported because users aren't on Linux. Hardware OEMs don't ship Linux laptops because average buyers don't demand them in retail stores.
+          </p>
+          <div class="terminal-box" style="margin-top: 8px;">
+            <div class="terminal-topbar">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="terminal-title">paradox.sh</span>
+            </div>
+            <div class="terminal-body" style="font-size: 12px; padding: 12px 14px;">
+              <span style="color: var(--emerald-light);">$</span> while [ "$desktop_users" -lt "$critical_mass" ]; do<br>
+              &nbsp;&nbsp;await "software_vendors";<br>
+              &nbsp;&nbsp;vendors_say "awaiting hardware preinstalls...";<br>
+              done
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: WHY LINUX? ==================== -->
+  <section class="slide" id="slide-4">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">02</span>
+        <h2>Why Linux?</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        Beyond the desktop paradox, why do developers and power users choose Linux over commercial operating systems?
+      </p>
+
+      <div class="card-grid-3 anim-item">
+        <div class="glass-card accent-emerald">
+          <div class="card-icon-box icon-emerald">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 class="card-title">Freedom from Spyware</h3>
+          <p class="card-desc">
+            Linux represents <strong>true digital ownership</strong>. No forced updates during critical work, no baked-in background telemetry, no AI Recall taking screenshots of your activity, and zero corporate bloatware breathing down your neck.
+          </p>
+          <div class="card-tag" style="background: var(--emerald-dim); color: var(--emerald-light);">Digital Sovereignty</div>
+        </div>
+
+        <div class="glass-card accent-cyan">
+          <div class="card-icon-box icon-cyan">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          </div>
+          <h3 class="card-title">Total System Transparency</h3>
+          <p class="card-desc">
+            Every process, network socket, configuration file, and kernel module is inspectable in plain text. If something breaks or runs slowly, you have the diagnostic tools and source code to investigate.
+          </p>
+          <div class="card-tag" style="background: var(--cyan-dim); color: var(--cyan-light);">Inspectability</div>
+        </div>
+
+        <div class="glass-card accent-amber">
+          <div class="card-icon-box icon-amber">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <h3 class="card-title">Open Core & Real Blobs</h3>
+          <p class="card-desc">
+            While Linux itself is open source, desktop hardware often interfaces with proprietary binary blobs — such as vendor Wi-Fi firmware and proprietary GPU drivers (such as NVIDIA drivers).
+          </p>
+          <div class="card-tag" style="background: var(--amber-dim); color: var(--amber-light);">Hardware Realities</div>
+        </div>
+      </div>
+
+      <div class="slide-footnote anim-item">
+        <span class="footnote-tag">Note: Kernel ≠ OS</span>
+        <span>Linux strictly is the monolithic core kernel created by Linus Torvalds in 1991 (hardware abstraction, process scheduler, memory manager). The full operating system is GNU/Linux, Android, or distribution userlands (systemd, glibc, desktop environments, package managers).</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: MY ORIGIN STORY ==================== -->
+  <section class="slide" id="slide-5">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">03</span>
+        <h2>My Origin Story: From Linux to Open Source</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        My investment in open source wasn't born in a classroom. It began with curiosity, trial and error, and repeatedly breaking things until they worked:
+      </p>
+
+      <div class="card-grid-3 anim-item">
+        <div class="glass-card accent-cyan">
+          <div class="card-icon-box icon-cyan">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          </div>
+          <h3 class="card-title">3rd Grade Lab PCs</h3>
+          <p class="card-desc">
+            My school enforced Linux on laboratory computers since 3rd grade. While peers found it unfamiliar, it sparked a persistent urge to install Linux on my own hardware at home.
+          </p>
+          <div class="card-tag" style="background: var(--cyan-dim); color: var(--cyan-light);">Curiosity (Age 8)</div>
+        </div>
+
+        <div class="glass-card accent-amber">
+          <div class="card-icon-box icon-amber">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3 class="card-title">9th Grade: Daily Driving</h3>
+          <p class="card-desc">
+            After on-and-off dual booting, made the permanent switch in 9th grade to daily driving Linux <strong>99% of the time</strong> as a 13-14 year old, relying on it for all daily tasks.
+          </p>
+          <div class="card-tag" style="background: var(--amber-dim); color: var(--amber-light);">Commitment (Age 14)</div>
+        </div>
+
+        <div class="glass-card accent-rose">
+          <div class="card-icon-box icon-rose">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <h3 class="card-title">Nuked Data Multiple Times</h3>
+          <p class="card-desc">
+            Without formal guidance, I frequently broke bootloaders, destroyed partition tables, and <strong>nuked all my data multiple times</strong>. Every fatal crash forced me to learn Bash scripting and C in 10th grade just to recover.
+          </p>
+          <div class="card-tag" style="background: var(--rose-dim); color: var(--rose-light);">Trial by Fire</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: THE PIVOT ==================== -->
+  <section class="slide" id="slide-6">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">04</span>
+        <h2>The Pivot: Radical Transparency</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        Breaking my system led to the defining realization of my developer journey: <strong>in proprietary software, a crash is a dead end. In open source, a crash is an invitation to understand.</strong>
+      </p>
+
+      <div class="card-grid-2 anim-item">
+        <div class="glass-card accent-rose">
+          <div class="card-icon-box icon-rose">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3 class="card-title">Proprietary Software: The Black Box</h3>
+          <p class="card-desc">
+            When closed software crashes, you receive an opaque error code like <code>0x80004005</code>. You cannot view the code, you cannot debug the memory address, and you are entirely at the mercy of vendor support cycles.
+          </p>
+          <div style="margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--rose-light); background: var(--rose-dim); padding: 8px 12px; border-radius: 6px;">
+            Opaque crash log. Zero visibility. Powerless user.
+          </div>
+        </div>
+
+        <div class="glass-card accent-emerald">
+          <div class="card-icon-box icon-emerald">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="card-title">Open Source: Radical Transparency</h3>
+          <p class="card-desc">
+            99% of the time, someone had already documented the issue on a <strong>GitHub Issue</strong> tracker. And when no issue existed, you could read the source code directly, trace where execution failed, and write your own patch.
+          </p>
+          <div style="margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--emerald-light); background: var(--emerald-dim); padding: 8px 12px; border-radius: 6px;">
+            Open Codebase: Clone → Inspect Trace → Patch → Upstream.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: QUESTION 2 ==================== -->
+  <section class="slide" id="slide-7">
+    <div class="slide-content question-slide">
+      <div class="question-badge anim-item">
+        <span class="question-tag">Audience Question</span>
+      </div>
+
+      <h2 class="question-title anim-item">
+        How many of you know what<br>
+        <span class="gradient-text-emerald">AOSP</span> is?
+      </h2>
+
+      <p class="question-subtitle anim-item">
+        Raise your hands if you know the open-source foundation behind billions of smartphones.
+      </p>
+
+      <div class="question-box anim-item">
+        <div class="question-icon">?</div>
+        <div class="question-hint">
+          <strong>Android Open Source Project:</strong> The open source operating system maintained by Google that forms the basis of all Android distributions, custom ROMs (LineageOS, PixelOS), and custom recovery software (TWRP).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: THE AOSP RABBIT HOLE ==================== -->
+  <section class="slide" id="slide-8">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">05</span>
+        <h2>The Deep Dive: The AOSP Rabbit Hole</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        The ultimate catalyst for my open source journey was an ambition to solve a practical hardware problem: <strong>making an old potato phone (Oppo A37f) run faster by compiling custom AOSP firmware.</strong>
+      </p>
+
+      <div class="card-grid-4 anim-item">
+        <div class="glass-card accent-cyan">
+          <div class="card-icon-box icon-cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          </div>
+          <h3 class="card-title">Potato Phone Rescue</h3>
+          <p class="card-desc">
+            Stock manufacturer firmware was bloated and sluggish. Compiling lightweight AOSP firmwares restored smooth performance and upgraded ancient Android versions.
+          </p>
+        </div>
+
+        <div class="glass-card accent-amber">
+          <div class="card-icon-box icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          </div>
+          <h3 class="card-title">Custom Device Trees</h3>
+          <p class="card-desc">
+            AOSP has no "one-size-fits-all" image. Every phone requires building a custom device tree, extracting vendor proprietary blobs, and tuning kernel configurations.
+          </p>
+        </div>
+
+        <div class="glass-card accent-emerald">
+          <div class="card-icon-box icon-emerald">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+          </div>
+          <h3 class="card-title">Git & Version Control</h3>
+          <p class="card-desc">
+            Managing Android manifests with 50+ sub-repositories forced me to master Git cherry-picking, upstream rebasing, merge conflict resolution, and manifests.
+          </p>
+        </div>
+
+        <div class="glass-card accent-violet">
+          <div class="card-icon-box icon-violet">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+          </div>
+          <h3 class="card-title">Docker & Cloud Builds</h3>
+          <p class="card-desc">
+            Compiling 100GB source trees overwhelmed consumer laptops. Learned Docker containerization and Google Cloud Platform (GCP) VMs to run multi-hour compilation pipelines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: REAL CASE STUDY (LINUTIL) ==================== -->
+  <section class="slide" id="slide-9">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">06</span>
+        <h2>Case Study: 10 Lines That Fixed Fedora</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        A real example of meaningful contribution: diagnosing and fixing a silent package manager syntax breakage in <strong>Chris Titus Tech's Linutil</strong> (PR #1367):
+      </p>
+
+      <div class="paradox-container anim-item">
+        <div class="terminal-box">
+          <div class="terminal-topbar">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">ChrisTitusTech/linutil · PR #1367</span>
+          </div>
+          <div class="terminal-body" style="font-size: 11px; padding: 14px 16px; line-height: 1.6;">
+            <div class="diff-comment"># Fedora 41+ DNF5 config-manager syntax migration</div>
+            <span class="diff-del">- "$ESCALATION_TOOL" "$PACKAGER" config-manager --set-enabled google-chrome</span>
+            <span class="diff-add">+ fedora_version=$(rpm -E %fedora)</span>
+            <span class="diff-add">+ if [ "$fedora_version" -ge 41 ]; then</span>
+            <span class="diff-add">+     "$ESCALATION_TOOL" "$PACKAGER" config-manager setopt google-chrome.enabled=1</span>
+            <span class="diff-add">+ else</span>
+            <span class="diff-add">+     "$ESCALATION_TOOL" "$PACKAGER" config-manager --set-enabled google-chrome</span>
+            <span class="diff-add">+ fi</span>
+            <div class="diff-comment"># Applied across 2 scripts · 10 lines changed · Reviewed & Merged</div>
+          </div>
+        </div>
+
+        <div class="glass-card accent-emerald">
+          <div class="card-icon-box icon-emerald">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <h3 class="card-title">The Philosophy Behind It</h3>
+          <p class="card-desc">
+            In Fedora 41, DNF5 changed the command line syntax for enabling repository configs. Linutil's existing setup scripts silently broke for Fedora 41 users.
+          </p>
+          <ul style="padding-left: 20px; color: var(--text-dim); font-size: 0.88rem; line-height: 1.55;">
+            <li>Diagnosed the DNF version boundary using <code>rpm -E %fedora</code></li>
+            <li>Implemented backward-compatible conditional logic for Fedora 40 and 41+</li>
+            <li>Verified locally across both Fedora releases, then submitted PR #1367</li>
+            <li><strong>Outcome:</strong> Reviewed, merged, and works automatically for all downstream users.</li>
+          </ul>
+          <div style="font-size: 0.85rem; font-weight: 600; color: var(--emerald-light); margin-top: 4px;">
+            "If you fix a broken tool for yourself, take 5 minutes to submit it upstream for everyone."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: CONTRIBUTION ETHICS ==================== -->
+  <section class="slide" id="slide-10">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">07</span>
+        <h2>Meaningful Contributions vs. AI Slop</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        Open source repositories face an unprecedented flood of automated noise. What constitutes real, respected open source contribution?
+      </p>
+
+      <div class="comparison-grid anim-item">
+        <div class="comp-column bad">
+          <div class="comp-header bad">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+            <span>What NOT to Do (Green Square Chasing)</span>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--rose-light);">[No]</div>
+            <div><strong>AI-Generated PR Spam:</strong> Blindly pasting hallucinated AI refactors into large repositories without local compilation or testing.</div>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--rose-light);">[No]</div>
+            <div><strong>Trivial Typo Hunting:</strong> Modifying single punctuation marks or markdown spacing across 50 unrelated repositories for vanity metrics.</div>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--rose-light);">[No]</div>
+            <div><strong>Demanding Issues Without Logs:</strong> Opening issues claiming "it doesn't work" without environment info, terminal logs, or reproduction steps.</div>
+          </div>
+        </div>
+
+        <div class="comp-column good">
+          <div class="comp-header good">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span>Real, High-Value Contributions</span>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--emerald-light);">[Yes]</div>
+            <div><strong>Solving Real Pain Points:</strong> Fixing bugs you personally encountered and verified on actual systems.</div>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--emerald-light);">[Yes]</div>
+            <div><strong>Hardware Maintenance:</strong> Maintaining device trees, custom kernel configs, and build scripts for unmaintained hardware.</div>
+          </div>
+          <div class="comp-item">
+            <div style="font-weight: 700; color: var(--emerald-light);">[Yes]</div>
+            <div><strong>Context & Reproductions:</strong> Providing clean atomic commits, regression testing, and precise reproduction steps.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 11: MY OPEN SOURCE TRACK RECORD ==================== -->
+  <section class="slide" id="slide-11">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">08</span>
+        <h2>My Open Source Contributions</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        A selection of pull requests, device trees, and manifests contributed and maintained across the Android, TWRP, and Linux ecosystems:
+      </p>
+
+      <div class="pr-grid anim-item">
+        <a class="pr-card" href="https://twrp.me/oppo/oppoA37f.html" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-official">Official Maintainer</span>
+            <span class="pr-repo">TeamWin/android_device</span>
+          </div>
+          <div class="pr-title">TWRP for Oppo A37f</div>
+          <div class="pr-desc">Built & maintained official TWRP recovery device tree for Oppo A37f, enabling custom ROM flashing for thousands of device owners.</div>
+          <div class="pr-footer">
+            <span>twrp.me/oppo/oppoA37f.html</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+
+        <a class="pr-card" href="https://github.com/ChrisTitusTech/linutil/pull/1367" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-merged">Merged PR #1367</span>
+            <span class="pr-repo">ChrisTitusTech/linutil</span>
+          </div>
+          <div class="pr-title">Fedora Script Fixes</div>
+          <div class="pr-desc">Fixed broken package management logic across Fedora setup scripts in Chris Titus Tech's popular Linux utility toolbox.</div>
+          <div class="pr-footer">
+            <span>linutil #1367</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+
+        <a class="pr-card" href="https://github.com/Corvus-AOSP/android_manifest/pull/1" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-merged">Merged PR #1</span>
+            <span class="pr-repo">Corvus-AOSP/manifest</span>
+          </div>
+          <div class="pr-title">Android Manifest Fix</div>
+          <div class="pr-desc">Resolved repository tracking and upstream synchronization paths in Corvus-AOSP's initial build manifest.</div>
+          <div class="pr-footer">
+            <span>Corvus-AOSP #1</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+
+        <a class="pr-card" href="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni/pull/107" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-merged">Merged PR #107</span>
+            <span class="pr-repo">minimal-manifest-twrp</span>
+          </div>
+          <div class="pr-title">Omni Manifest Patch</div>
+          <div class="pr-desc">Corrected branch dependencies and build environment definitions in minimal TWRP Omni tree configuration.</div>
+          <div class="pr-footer">
+            <span>manifest_twrp_omni #107</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+
+        <a class="pr-card" href="https://github.com/LineageOS-Revived/android/pull/1" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-merged">Merged PR #1</span>
+            <span class="pr-repo">LineageOS-Revived</span>
+          </div>
+          <div class="pr-title">LineageOS Build Sync</div>
+          <div class="pr-desc">Restructured legacy device support manifests to restore build capability for discontinued Qualcomm chipsets.</div>
+          <div class="pr-footer">
+            <span>LineageOS-Revived #1</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+
+        <a class="pr-card" href="https://github.com/akhilnarang/scripts/pull/199" target="_blank" rel="noopener">
+          <div class="pr-header">
+            <span class="pr-status status-merged">Merged PRs #199 & #202</span>
+            <span class="pr-repo">akhilnarang/scripts</span>
+          </div>
+          <div class="pr-title">Build Environment Scripts</div>
+          <div class="pr-desc">Updated dependency installation routines and package definitions for the industry-standard Android build environment script.</div>
+          <div class="pr-footer">
+            <span>akhilnarang/scripts #199</span>
+            <span class="pr-link-icon">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 12: PROBLEM SOLVING METHOD ==================== -->
+  <section class="slide" id="slide-12">
+    <div class="slide-content">
+      <div class="slide-header anim-item">
+        <span class="slide-number">09</span>
+        <h2>My 4-Step Problem Solving Framework</h2>
+      </div>
+
+      <p class="slide-intro anim-item">
+        How to approach broken tools or software issues methodically without getting overwhelmed:
+      </p>
+
+      <div class="step-flow-grid anim-item">
+        <div class="step-card">
+          <span class="step-badge">STEP 01</span>
+          <h3 class="step-title">Encounter in Real Flow</h3>
+          <p class="step-desc">
+            Use real tools for authentic workflows. Natural bugs encountered during daily work are far more valuable than synthetic exercises.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">STEP 02</span>
+          <h3 class="step-title">Isolate & Trace</h3>
+          <p class="step-desc">
+            Enable verbose execution logs (<code>set -x</code> in bash, <code>dmesg</code>, <code>strace</code>). Inspect the exact source line where failure occurs.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">STEP 03</span>
+          <h3 class="step-title">Patch & Battle-Test</h3>
+          <p class="step-desc">
+            Write a minimal local patch. Verify the solution survives reboots and boundary conditions without causing unintended regressions.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">STEP 04</span>
+          <h3 class="step-title">Upstream Cleanly</h3>
+          <p class="step-desc">
+            Submit a GitHub pull request with reproduction steps, clean atomic commits, and clear explanation of <em>why</em> the change is needed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 13: CALL TO ACTION ==================== -->
+  <section class="slide" id="slide-13">
+    <div class="slide-content title-slide">
+      <div class="slide-header anim-item" style="justify-content: center; margin-bottom: 12px;">
+        <span class="slide-number">10</span>
+        <h2>The Takeaway & Call to Action</h2>
+      </div>
+
+      <h1 class="main-title anim-item" style="font-size: clamp(2rem, 3.8vw, 3.2rem); margin-bottom: 16px;">
+        Start Fixing <span class="gradient-text-emerald">Your Own Tools</span>
+      </h1>
+
+      <p class="title-subtitle anim-item" style="margin-bottom: 24px;">
+        You don't need years of senior experience to be an open source contributor. You just need curiosity, the willingness to break things, and the empathy to share your solutions.
+      </p>
+
+      <div class="card-grid-3 anim-item" style="max-width: 1000px; margin-bottom: 24px; text-align: left;">
+        <div class="glass-card accent-cyan">
+          <div class="card-icon-box icon-cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <h4 style="font-size: 1rem; color: #fff; font-weight: 700;">No Permission Needed</h4>
+          <p style="font-size: 0.85rem; color: var(--text-dim);">Open source has no gatekeepers. The code is public; clone it, inspect it, improve it.</p>
+        </div>
+        <div class="glass-card accent-amber">
+          <div class="card-icon-box icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <h4 style="font-size: 1rem; color: #fff; font-weight: 700;">Embrace the Breakage</h4>
+          <p style="font-size: 0.85rem; color: var(--text-dim);">Every broken bootloader and kernel panic is the fastest masterclass in operating systems.</p>
+        </div>
+        <div class="glass-card accent-emerald">
+          <div class="card-icon-box icon-emerald">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+          <h4 style="font-size: 1rem; color: #fff; font-weight: 700;">Give Back Patches</h4>
+          <p style="font-size: 0.85rem; color: var(--text-dim);">Your 10-line script fix today will save thousands of developers hours of frustration tomorrow.</p>
+        </div>
+      </div>
+
+      <div class="title-meta anim-item" style="justify-content: center;">
+        <span class="meta-pill">GitHub: <span class="speaker-name">@Megh-Rana</span></span>
+        <span class="meta-pill">megh-rana.github.io/Presentations</span>
+        <span class="meta-pill" style="color: var(--emerald-light);">Thank You · Questions?</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== OVERVIEW MODAL ==================== -->
+  <div class="overview-modal" id="overviewModal">
+    <div class="overview-header">
+      <h3>Slide Overview</h3>
+      <button class="close-modal-btn" id="btnCloseOverview">Close (Esc)</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid">
+      <!-- Generated dynamically by script.js -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
