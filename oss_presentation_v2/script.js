@@ -1,5 +1,5 @@
 /* ============================================================
-   Open Source & Linux Presentation — Navigation & Controller
+   Open Source & Linux Presentation V2 — Navigation & Controller
    Author: Megh Rana
    ============================================================ */
 
@@ -26,44 +26,42 @@
   // Slide titles list for overview
   const slideTitles = [
     '00 · Title Hero',
-    '01 · Question: Linux Desktop?',
-    '02 · The Desktop Paradox',
-    '03 · Why Linux?',
-    '04 · Troubles That Taught Me',
-    '05 · The Pivot to Open Source',
-    '06 · Question: Slow Phone?',
-    '07 · Building My Own Android',
-    '08 · Fixing a Dev\'s Utility Script',
-    '09 · Quality vs AI Slop',
-    '10 · 4-Step Problem Solving',
-    '11 · My Open Source Contributions',
-    '12 · Call to Action & Conclusion'
+    '01 · Who Am I?',
+    '02 · Question: Linux Desktop?',
+    '03 · The Desktop Paradox',
+    '04 · Why Linux?',
+    '05 · Troubles That Taught Me',
+    '06 · The Pivot to Open Source',
+    '07 · Question: Slow Phone?',
+    '08 · Building My Own Android',
+    '09 · Fixing a Dev\'s Utility Script',
+    '10 · Quality vs AI Slop',
+    '11 · 4-Step Problem Solving',
+    '12 · My Open Source Contributions',
+    '13 · Call to Action & Conclusion'
   ];
 
-  // ── Floating Matrix/Code Particles ──────────────────────────
+  // ── Floating Particles ──────────────────────────────────────
   function createParticles() {
     const container = document.createElement('div');
     container.className = 'particles';
     document.body.appendChild(container);
 
-    const symbols = ['$', '>', '#', 'git', '{}', '&&', '||', '0', '1', 'pull', 'diff'];
-
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 25; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left = Math.random() * 100 + '%';
       p.style.animationDelay = Math.random() * 18 + 's';
       p.style.animationDuration = (14 + Math.random() * 14) + 's';
-      
-      const size = 2 + Math.random() * 3;
+
+      const size = 1.5 + Math.random() * 2.5;
       p.style.width = p.style.height = size + 'px';
-      
-      if (Math.random() > 0.6) {
-        p.style.background = 'var(--cyan)';
-      } else if (Math.random() > 0.8) {
-        p.style.background = 'var(--violet)';
+
+      // Randomly assign blue or green particles
+      if (Math.random() > 0.5) {
+        p.style.background = 'var(--blue)';
       }
-      
+
       container.appendChild(p);
     }
   }
@@ -75,11 +73,11 @@
     slides.forEach((slide, index) => {
       const thumb = document.createElement('div');
       thumb.className = `overview-thumb ${index === currentSlide ? 'current' : ''}`;
-      
+
       const num = document.createElement('div');
       num.className = 'thumb-num';
       num.textContent = `SLIDE ${String(index + 1).padStart(2, '0')}`;
-      
+
       const title = document.createElement('div');
       title.className = 'thumb-title';
       title.textContent = slideTitles[index] || `Slide ${index + 1}`;
@@ -109,7 +107,7 @@
   function updateUI() {
     const progress = ((currentSlide + 1) / totalSlides) * 100;
     progressFill.style.width = `${progress}%`;
-    slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    slideCounter.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
 
     btnPrev.disabled = currentSlide === 0;
     btnNext.disabled = currentSlide === totalSlides - 1;
