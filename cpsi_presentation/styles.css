@@ -174,26 +174,26 @@ html, body {
 /* ── Fixed Institutional Brand Bar (Present on every slide) ─ */
 .inst-brand-bar {
   position: fixed;
-  top: 12px;
+  top: 10px;
   left: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 4px 14px;
-  border-radius: 24px;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 5px 16px;
+  border-radius: 28px;
   border: 1px solid var(--border);
-  box-shadow: 0 4px 14px rgba(20, 34, 32, 0.05);
+  box-shadow: 0 4px 16px rgba(20, 34, 32, 0.06);
   z-index: 900;
   transition: all 0.25s ease;
 }
 
 .inst-brand-bar:hover {
   background: #ffffff;
-  border-color: rgba(34, 107, 107, 0.3);
-  box-shadow: 0 6px 20px rgba(34, 107, 107, 0.12);
+  border-color: rgba(34, 107, 107, 0.35);
+  box-shadow: 0 6px 22px rgba(34, 107, 107, 0.12);
 }
 
 .brand-logo {
@@ -202,19 +202,19 @@ html, body {
 }
 
 .logo-charusat {
-  height: 22px;
+  height: 29px;
   width: auto;
-  max-width: 130px;
+  max-width: 160px;
 }
 
 .logo-cspit {
-  height: 26px;
+  height: 33px;
   width: auto;
 }
 
 .logo-ce {
-  height: 26px;
-  width: 26px;
+  height: 33px;
+  width: 33px;
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid rgba(34, 107, 107, 0.18);
@@ -222,8 +222,8 @@ html, body {
 
 .brand-divider {
   width: 1px;
-  height: 16px;
-  background: rgba(34, 107, 107, 0.2);
+  height: 20px;
+  background: rgba(34, 107, 107, 0.22);
 }
 
 /* ── Top Bar Controls ─────────────────────────────────────── */
@@ -968,70 +968,8 @@ html, body {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.25rem;
   max-width: 980px;
-}
-
-.hero-institution-strip {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--border);
-  padding: 6px 16px;
-  border-radius: 40px;
-  width: fit-content;
-  box-shadow: 0 4px 16px rgba(20, 34, 32, 0.05);
-}
-
-.hero-logo-charusat {
-  height: 26px;
-  width: auto;
-  max-width: 150px;
-  object-fit: contain;
-}
-
-.hero-logo-cspit {
-  height: 30px;
-  width: auto;
-  object-fit: contain;
-}
-
-.hero-logo-ce {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  object-fit: contain;
-  background: #ffffff;
-  border: 1px solid rgba(34, 107, 107, 0.18);
-}
-
-.hero-strip-divider {
-  width: 1px;
-  height: 20px;
-  background: rgba(34, 107, 107, 0.2);
-}
-
-.hero-institution-labels {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  text-align: left;
-}
-
-.hero-inst-title {
-  font-family: var(--font-heading);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  color: var(--pine-dark);
-}
-
-.hero-inst-sub {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  letter-spacing: 0.03em;
 }
 
 .subject-badge {
@@ -1263,11 +1201,9 @@ html, body {
 @media (max-width: 640px) {
   .slide { padding: 4rem 1rem 1.5rem; }
   .inst-brand-bar { top: 8px; left: 8px; padding: 3px 10px; gap: 6px; }
-  .logo-charusat { height: 16px; max-width: 80px; }
-  .logo-cspit { height: 20px; }
-  .logo-ce { height: 20px; width: 20px; }
-  .hero-institution-strip { flex-wrap: wrap; border-radius: 16px; padding: 6px 12px; gap: 8px; }
-  .hero-institution-labels { display: none; }
+  .logo-charusat { height: 18px; max-width: 90px; }
+  .logo-cspit { height: 22px; }
+  .logo-ce { height: 22px; width: 22px; }
   .top-bar { top: 10px; right: 10px; gap: 6px; }
   .quick-nav { bottom: 12px; right: 12px; }
   .nav-hint { display: none; }
