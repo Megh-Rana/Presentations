@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Source: Creativity, Problem Solving & Innovation in the Real World — HSUV201</title>
+  <meta name="description" content="Open Source: Creativity at Scale — How the fundamentals of creativity, problem solving and innovation solve real-world challenges and guide meaningful contributions. HSUV201 presentation by Megh Rana.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient background glow blobs -->
+  <div class="ambient-bg">
+    <div class="ambient-blob ambient-blob-1"></div>
+    <div class="ambient-blob ambient-blob-2"></div>
+    <div class="ambient-blob ambient-blob-3"></div>
+  </div>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Top Bar Controls -->
+  <div class="top-bar">
+    <div class="slide-counter" id="slideCounter">
+      <span class="current-num">01</span> / 14
+    </div>
+    <button class="control-btn" id="btnOverview" title="Slide Overview (O)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+    </button>
+    <button class="control-btn" id="btnFullscreen" title="Toggle Fullscreen (F)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Floating Nav Controls -->
+  <div class="quick-nav">
+    <button class="nav-arrow-btn" id="btnPrev" title="Previous Slide (←)" disabled>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="nav-arrow-btn" id="btnNext" title="Next Slide (→)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navigation Hint -->
+  <div class="nav-hint" id="navHint">
+    <span class="key">←</span> <span class="key">→</span> or <span class="key">Space</span> to navigate · <span class="key">O</span> overview · <span class="key">F</span> fullscreen
+  </div>
+
+  <!-- ==================== SLIDES WRAPPER ==================== -->
+  <div class="slides-container">
+
+    <!-- ==================== SLIDE 1: TITLE HERO ==================== -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-content">
+        <div class="title-hero">
+          <div class="subject-badge anim-item anim-delay-1">
+            <span class="badge-dot"></span>
+            HSUV201 · Creativity, Problem Solving &amp; Innovation
+          </div>
+
+          <h1 class="anim-item anim-delay-2">
+            OPEN SOURCE: <br>
+            <span class="gradient-text">CREATIVITY AT SCALE</span>
+          </h1>
+
+          <p class="hero-subtitle anim-item anim-delay-3">
+            How the fundamentals of Creativity, Problem Solving, and Innovation solve real-world challenges — and how anyone can use them to make meaningful contributions.
+          </p>
+
+          <div class="hero-meta-bar anim-item anim-delay-4">
+            <div class="meta-item">
+              <span class="meta-label">Presenter</span>
+              <span class="meta-value">Megh Rana</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Roll Number</span>
+              <span class="meta-value value-rose">25CE099</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Department &amp; Batch</span>
+              <span class="meta-value">Computer Engineering · 3CE2 A2</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Core Focus</span>
+              <span class="meta-value value-rose">CPI in the Real World</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: WHAT IS OPEN SOURCE REALLY? ==================== -->
+    <section class="slide" id="slide-2">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-rose">// 01 THE CORE QUESTION</div>
+          <h2>What is Open Source <span class="highlight-pine">Really?</span></h2>
+          <p class="slide-subtitle">Beyond code repositories and legal licenses, open source is humanity's largest living laboratory for fundamental problem-solving methodologies.</p>
+        </div>
+
+        <div class="grid-3 anim-item anim-delay-2">
+          <!-- Pillar 1 -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"></path>
+                <line x1="9" y1="21" x2="15" y2="21"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">1. Creativity</div>
+            <p class="card-text">
+              Where do breakthroughs come from when there is <strong>no boss giving instructions</strong>? How do individuals observe everyday pain points and generate unexpected, novel ideas?
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Divergence &amp; Vision</div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--pale-sky);">2. Problem Solving</div>
+            <p class="card-text">
+              How do thousands of strangers identify the <strong>true root cause</strong> of a failure instead of just masking the symptom? How do they break overwhelming complexity into conquerable pieces?
+            </p>
+            <div class="card-footer-pill">Root Cause &amp; Decomposition</div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="cpsi-card card-sky">
+            <div class="card-icon" style="background: rgba(199,232,243,0.15); color: var(--pale-sky);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <div class="card-title">3. Innovation</div>
+            <p class="card-text">
+              How do small, individual 1% improvements compound into <strong>planetary shifts</strong> that power hospitals, space missions, and everyday smartphones?
+            </p>
+            <div class="card-footer-pill" style="color: var(--pale-sky); border-color: var(--border);">Compound Scale &amp; Impact</div>
+          </div>
+        </div>
+
+        <div class="quote-banner anim-item anim-delay-3" style="margin-top: 1.5rem;">
+          <div class="quote-mark">“</div>
+          <div class="quote-text">
+            “Open Source is not merely a method for developing software; it is a collaborative philosophy for addressing human challenges in the open.”
+          </div>
+          <div class="quote-author">
+            <span>— The Fundamental Thesis of CPI in the Real World</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: CREATIVITY - PROBLEM FINDING & EMPATHY ==================== -->
+    <section class="slide" id="slide-3">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-rose">// 02 CREATIVITY IN ACTION</div>
+          <h2>Step 1 of Creativity: <span class="highlight-rose">Empathy &amp; Problem Finding</span></h2>
+          <p class="slide-subtitle">In classroom Design Thinking, creativity begins with empathy. In the real world, the most creative contributors are those who notice what everyone else ignores.</p>
+        </div>
+
+        <div class="grid-2 anim-item anim-delay-2">
+          <!-- Left: Empathy -->
+          <div class="cpsi-card card-rose">
+            <div class="card-title" style="color: var(--cotton-rose);">Unconscious Pain vs. Creative Awareness</div>
+            <p class="card-text">
+              Most people adapt to bad tools. They accept that a workflow takes 10 repetitive clicks, that an error message is confusing, or that software runs slowly on older computers.<br><br>
+              <strong>Creative thinkers refuse to accept unnecessary friction:</strong><br>
+              • They observe where beginners get stuck.<br>
+              • They ask the simple, childlike question: <em>“Why does it have to be this hard?”</em><br>
+              • They empathize with non-technical users who are left behind.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Empathy-Driven Problem Discovery</div>
+          </div>
+
+          <!-- Right: Real-World Story (VLC) -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--pale-sky);">Real-World Story: The Birth of VLC</div>
+            <p class="card-text">
+              In 1996, college students at École Centrale Paris had a fast campus network, but couldn't stream TV broadcasts or play diverse video formats across their student dorms.<br><br>
+              Instead of waiting for commercial companies to solve it, they used <strong>empathy for their peers</strong> to creatively build <strong>VLC Media Player</strong>. Today, that student project has been downloaded over <strong>3 billion times</strong> worldwide and plays any video on any device without commercial bloat.
+            </p>
+            <div class="card-footer-pill">From Campus Frustration to Global Impact</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: CREATIVITY - DIVERGENT THINKING & REMIX ==================== -->
+    <section class="slide" id="slide-4">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 03 CREATIVE METHODOLOGIES</div>
+          <h2>Divergent Thinking &amp; <span class="highlight-pine">The Remix Culture</span></h2>
+          <p class="slide-subtitle">True creativity is rarely an isolated spark from nothing. It is combinatorial thinking: connecting two things that no one thought to combine.</p>
+        </div>
+
+        <div class="grid-3 anim-item anim-delay-2">
+          <!-- Card 1 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 12h8"></path>
+                <path d="M12 8v8"></path>
+              </svg>
+            </div>
+            <div class="card-title">Divergent Ideation</div>
+            <p class="card-text">
+              When faced with an issue, conventional thinkers stop at the first workable answer. Open-source communities practice <strong>divergence</strong>: proposing 10 unconventional ways to solve it before selecting the most elegant one.
+            </p>
+            <div class="card-footer-pill">Quantity Breeds Quality</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Combinatorial Remixing</div>
+            <p class="card-text">
+              <em>“Good artists copy; great artists steal.”</em> Contributors borrow proven ideas across boundaries—taking gaming controller logic to control robotic arms, or applying web animations to CLI terminal screens.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Cross-Domain Synthesis</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <div class="card-title">Creative Constraints</div>
+            <p class="card-text">
+              Creativity flourishes when resources are scarce. Open-source contributors often work with zero funding and older hardware, forcing them to engineer ultra-efficient, lightweight, and elegant solutions.
+            </p>
+            <div class="card-footer-pill">Constraint Fosters Genius</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: OVERCOMING THE BLANK CANVAS ==================== -->
+    <section class="slide" id="slide-5">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-rose">// 04 CREATIVE ACCESSIBILITY</div>
+          <h2>Overcoming the Fear of the <span class="highlight-rose">Blank Canvas</span></h2>
+          <p class="slide-subtitle">In traditional creativity, staring at an empty sheet of paper induces paralysis. Open source provides psychological safety through scaffolding.</p>
+        </div>
+
+        <div class="grid-2-1 anim-item anim-delay-2">
+          <!-- Left: Scaffolding -->
+          <div class="cpsi-card">
+            <div class="card-title" style="color: var(--pale-sky);">Scaffolding: Standing on Existing Shoulders</div>
+            <p class="card-text">
+              In open source, you never start with zero:<br><br>
+              • <strong>Working Foundations:</strong> You are given an entire existing, operational project.<br>
+              • <strong>Low Barrier to Experiment:</strong> You can tweak one button color, refine one paragraph of documentation, or optimize one single calculation.<br>
+              • <strong>The "Fork" as a Safe Sandbox:</strong> You cannot break the main project. You copy it to your personal space, experiment freely, make mistakes, and learn without pressure.
+            </p>
+            <div class="card-footer-pill">Psychological Safety in Innovation</div>
+          </div>
+
+          <!-- Right: Permissive Experimentation -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Permissionless Prototyping</div>
+            <p class="card-text">
+              In a company, you need managerial approval, budget sign-off, and weeks of committee meetings to test a creative idea.<br><br>
+              In open source, there are <strong>zero gatekeepers</strong>: you build the prototype this evening, run it with your friends, and demonstrate the tangible result.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Action Over Bureaucracy</div>
+          </div>
+        </div>
+
+        <div class="quote-banner anim-item anim-delay-3" style="margin-top: 1.25rem;">
+          <div class="quote-mark">“</div>
+          <div class="quote-text">
+            “You don't need to build a whole car to be creative. Sometimes the greatest contribution is designing a windshield wiper that doesn't squeak.”
+          </div>
+          <div class="quote-author">
+            <span>— The Modular Philosophy of Real-World Contribution</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: PROBLEM SOLVING - ROOT CAUSE VS SYMPTOMS ==================== -->
+    <section class="slide" id="slide-6">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 05 PROBLEM SOLVING FUNDAMENTALS</div>
+          <h2>Problem Framing: <span class="highlight-pine">Root Causes vs. Symptoms</span></h2>
+          <p class="slide-subtitle">Albert Einstein famously said: “If I had an hour to solve a problem, I'd spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.”</p>
+        </div>
+
+        <div class="versus-container anim-item anim-delay-2">
+          <!-- Left: Shallow symptom -->
+          <div class="cpsi-card card-side-closed">
+            <div class="card-title">Surface-Level Problem "Patching"</div>
+            <p class="card-text">
+              • <strong>Symptom:</strong> "The app crashes when a user types an emoji in their name."<br>
+              • <strong>Shallow Fix:</strong> Block emojis in the input field.<br>
+              • <strong>Result:</strong> Users are frustrated, the root database still corrupts special characters, and new crashes emerge tomorrow in other fields.<br><br>
+              <em>This treats the symptom while leaving the disease untouched.</em>
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Symptom Suppression · Fragile</div>
+          </div>
+
+          <!-- Divider -->
+          <div class="versus-divider">
+            <div class="versus-line"></div>
+            <span class="versus-badge">VS</span>
+            <div class="versus-line"></div>
+          </div>
+
+          <!-- Right: Deep root cause -->
+          <div class="cpsi-card card-side-open">
+            <div class="card-title" style="color: var(--pale-sky);">Systematic Root-Cause Analysis (5 Whys)</div>
+            <p class="card-text">
+              • <strong>Why did it crash?</strong> Buffer overflow in the string reader.<br>
+              • <strong>Why did it overflow?</strong> Assumed all characters are 1 byte.<br>
+              • <strong>Why?</strong> Legacy encoding was never upgraded to UTF-8.<br>
+              • <strong>Root Solution:</strong> Upgrade string handler to multi-byte unicode.<br><br>
+              <em>Solves the issue permanently across all international users worldwide.</em>
+            </p>
+            <div class="card-footer-pill" style="color: var(--pale-sky); border-color: var(--border);">First-Principles Resolution · Resilient</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: PROBLEM SOLVING - DECOMPOSITION ==================== -->
+    <section class="slide" id="slide-7">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 06 SYSTEMIC PROBLEM SOLVING</div>
+          <h2>Decomposition: <span class="highlight-pine">How to Eat an Elephant</span></h2>
+          <p class="slide-subtitle">When students look at an open-source project with 500,000 lines of code, they feel overwhelmed. Problem solving is the art of breaking the massive into the manageable.</p>
+        </div>
+
+        <div class="pipeline-steps anim-item anim-delay-2">
+          <!-- Step 1 -->
+          <div class="pipeline-step">
+            <span class="step-num">STEP 01</span>
+            <div class="step-title">Isolate the Variable</div>
+            <div class="step-desc">
+              Create a <strong>Minimal Reproducible Example</strong>. Strip away 99% of the code until you have a tiny, 10-line scenario where the problem reliably happens every single time.
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="pipeline-step" style="border-color: var(--border-rose);">
+            <span class="step-num" style="background: rgba(139,87,92,0.3); color: var(--cotton-rose);">STEP 02</span>
+            <div class="step-title" style="color: var(--cotton-rose);">Divide &amp; Conquer</div>
+            <div class="step-desc">
+              Binary search the problem space. Is it in the User Interface, the Network layer, or the Local Database? Cut the search space in half with each diagnostic check.
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="pipeline-step">
+            <span class="step-num">STEP 03</span>
+            <div class="step-title">Atomic Resolution</div>
+            <div class="step-desc">
+              Write a targeted, isolated fix that solves just this one sub-problem without altering unrelated systems. A 5-line clean fix is infinitely better than a messy 500-line rewrite.
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="pipeline-step" style="border-color: var(--border-glow);">
+            <span class="step-num" style="background: rgba(41,115,115,0.4); color: var(--pale-sky);">STEP 04</span>
+            <div class="step-title" style="color: var(--pale-sky);">Regression Defense</div>
+            <div class="step-desc">
+              Write a test that proves the bug is dead. If someone accidentally re-introduces the flaw three years from now, the automated system catches it instantly.
+            </div>
+          </div>
+        </div>
+
+        <div class="cpsi-card anim-item anim-delay-3" style="margin-top: 1.5rem;">
+          <div class="card-title">Cognitive Chunking in Daily Life</div>
+          <p class="card-text">
+            This decomposition skill is identical to how civil engineers design skyscrapers or doctors diagnose illness: you never solve a complex system as one monolithic chunk. You analyze components, test interfaces, and isolate failure boundaries.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 8: PROBLEM SOLVING - ITERATIVE FEEDBACK LOOPS ==================== -->
+    <section class="slide" id="slide-8">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-rose">// 07 PROBLEM SOLVING METHODOLOGIES</div>
+          <h2>The Iterative Loop: <span class="highlight-rose">Reframing Failure into Growth</span></h2>
+          <p class="slide-subtitle">In the classroom, mistakes on an exam lead to lost marks. In real-world problem solving, catching a mistake before it ships is celebrated as a victory.</p>
+        </div>
+
+        <div class="grid-3 anim-item anim-delay-2">
+          <!-- Card 1 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+            </div>
+            <div class="card-title">The Scientific Loop</div>
+            <p class="card-text">
+              <strong>Hypothesis $\rightarrow$ Test $\rightarrow$ Observe $\rightarrow$ Refine.</strong><br><br>
+              Problem solvers do not expect their first attempt to be perfect. They treat every draft as a working prototype designed to surface unexpected edge cases.
+            </p>
+            <div class="card-footer-pill">Hypothesis-Driven Iteration</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Peer Review as Mentorship</div>
+            <p class="card-text">
+              When a senior maintainer points out a flaw in your contribution, they are giving you <strong>free personalized mentorship</strong>. They show you a perspective you had never considered, expanding your mental model.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Constructive Peer Evaluation</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+              </svg>
+            </div>
+            <div class="card-title">Blameless Post-Mortems</div>
+            <p class="card-text">
+              When an outage or defect happens in open communities, the question is never <em>“Who broke it?”</em> but <em>“What hole in our verification process allowed this to happen?”</em> Fixing the system prevents future human error.
+            </p>
+            <div class="card-footer-pill">Psychological Safety &amp; Resilience</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 9: INNOVATION - INCREMENTAL VS RADICAL ==================== -->
+    <section class="slide" id="slide-9">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 08 INNOVATION THEORY</div>
+          <h2>The Myth of the Eureka Moment: <span class="highlight-pine">Incremental Innovation</span></h2>
+          <p class="slide-subtitle">Popular media portrays innovation as a lone genius having a sudden lightning flash of insight. In the real world, innovation is compounding 1% progress.</p>
+        </div>
+
+        <div class="grid-2-1 anim-item anim-delay-2">
+          <!-- Left: Compounding Concept -->
+          <div class="cpsi-card">
+            <div class="card-title" style="color: var(--pale-sky);">How 1% Improvements Change the World</div>
+            <p class="card-text">
+              In business and technology innovation (Kaizen principle):<br><br>
+              • <strong>Day 1:</strong> Someone builds a basic, clunky prototype that barely works.<br>
+              • <strong>Month 6:</strong> Ten strangers improve the user interface, fix installation hurdles, and translate it into 5 languages.<br>
+              • <strong>Year 3:</strong> Hundreds of contributors refine performance, add security, and make it rock-solid.<br>
+              • <strong>Year 10:</strong> That "simple prototype" has disrupted multi-billion-dollar proprietary incumbents.
+            </p>
+            <div class="card-footer-pill">The Compounding Power of Open Progress</div>
+          </div>
+
+          <!-- Right: Real-World Case (Blender) -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Real-World Case: Blender 3D</div>
+            <p class="card-text">
+              Commercial 3D software (Maya, 3ds Max) cost $2,000/year, locking out students and indie artists globally.<br><br>
+              Open source <strong>Blender</strong> was started by community passion. Year after year, animators, mathematicians, and coders contributed small incremental improvements. Today, Blender matches Hollywood studios and won an Academy Scientific Award!
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">From Indie Hobby to Industry Standard</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 10: INNOVATION - OPEN COLLABORATION & NETWORK EFFECTS ==================== -->
+    <section class="slide" id="slide-10">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 09 COLLABORATIVE INNOVATION</div>
+          <h2>Open Collaboration &amp; <span class="highlight-pine">Network Effects</span></h2>
+          <p class="slide-subtitle">Henry Chesbrough’s Open Innovation model: Why hoarding intellectual property creates dead ends, while sharing creates compounding ecosystems.</p>
+        </div>
+
+        <div class="grid-3 anim-item anim-delay-2">
+          <!-- Card 1 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div class="card-title">Closed Innovation Trap</div>
+            <p class="card-text">
+              Companies guard their secrets behind closed doors. They waste millions re-inventing the same wheels that competitors have already solved, creating redundant, wasted engineering effort.
+            </p>
+            <div class="card-footer-pill">Zero-Sum Siloing</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Metcalfe's Law / Networks</div>
+            <p class="card-text">
+              The value of an open tool scales exponentially with every new participant. When thousands of engineers use, test, and improve a shared tool, bugs are discovered faster and features evolve at 10x speed.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Positive-Sum Multiplier</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <div class="card-title">Shared Global Commons</div>
+            <p class="card-text">
+              When problems in infrastructure (operating systems, web protocols, cryptography) are solved in the open, they become public utilities. Future innovators can build next-generation applications on top for free.
+            </p>
+            <div class="card-footer-pill">Lego-Block Composability</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 11: INNOVATION - REAL-WORLD HUMAN IMPACT ==================== -->
+    <section class="slide" id="slide-11">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-rose">// 10 REAL-WORLD IMPACT</div>
+          <h2>Real-World Innovation: <span class="highlight-rose">Solving Global Human Challenges</span></h2>
+          <p class="slide-subtitle">Innovation is only meaningful if it improves human lives. Open-source problem solving bridges critical societal gaps that commercial markets ignore.</p>
+        </div>
+
+        <div class="grid-3 anim-item anim-delay-2">
+          <!-- Impact 1: Accessibility -->
+          <div class="cpsi-card card-rose">
+            <div class="card-icon icon-rose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--cotton-rose);">Accessibility &amp; Inclusion</div>
+            <p class="card-text">
+              Commercial screen readers for the blind cost upwards of $1,000. Blind programmers created <strong>NVDA (NonVisual Desktop Access)</strong> as a free, open-source screen reader—empowering millions of visually impaired students across developing countries.
+            </p>
+            <div class="card-footer-pill" style="color: var(--cotton-rose);">Democratizing Access</div>
+          </div>
+
+          <!-- Impact 2: Education -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--pale-sky);">Equitable Education</div>
+            <p class="card-text">
+              Linux, Python, Wikipedia, and open educational simulators allow a curious student in an Indian village with a $50 refurbished laptop to access the exact same programming tools and knowledge as a student at MIT or Stanford.
+            </p>
+            <div class="card-footer-pill">Leveling the Playing Field</div>
+          </div>
+
+          <!-- Impact 3: Disaster Response -->
+          <div class="cpsi-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+              </svg>
+            </div>
+            <div class="card-title" style="color: var(--pale-sky);">Crisis &amp; Healthcare</div>
+            <p class="card-text">
+              When natural disasters strike, commercial maps often fail. <strong>OpenStreetMap</strong> volunteers map destroyed bridges, evacuation routes, and aid stations within hours, saving lives in real-time during earthquakes and floods.
+            </p>
+            <div class="card-footer-pill">Rapid Humanitarian Coordination</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 12: THE CONTRIBUTOR PLAYBOOK ==================== -->
+    <section class="slide" id="slide-12">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 11 APPLIED CPI PLAYBOOK</div>
+          <h2>The Contributor Playbook: <span class="highlight-pine">Applying CPI in Practice</span></h2>
+          <p class="slide-subtitle">How any engineering student can apply Creativity, Problem Solving, and Innovation step-by-step to make their very first real-world contribution.</p>
+        </div>
+
+        <div class="pipeline-steps anim-item anim-delay-2">
+          <!-- Step 1 -->
+          <div class="pipeline-step">
+            <span class="step-num">PHASE 1</span>
+            <div class="step-title" style="color: var(--cotton-rose);">1. Empathize &amp; Spot Pain</div>
+            <div class="step-desc">
+              <strong>Creativity:</strong> Notice friction in an open tool you use. Is the documentation confusing? Is an error message misleading? Does a button fail on mobile screens?
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="pipeline-step" style="border-color: var(--border-glow);">
+            <span class="step-num" style="background: rgba(41,115,115,0.3); color: var(--pale-sky);">PHASE 2</span>
+            <div class="step-title" style="color: var(--pale-sky);">2. Frame the Root Issue</div>
+            <div class="step-desc">
+              <strong>Problem Solving:</strong> Don't just complain. Reproduce the bug cleanly, explain what happened vs what was expected, and search existing discussions to understand prior context.
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="pipeline-step">
+            <span class="step-num">PHASE 3</span>
+            <div class="step-title">3. Prototype &amp; Test</div>
+            <div class="step-desc">
+              <strong>Creativity + Solution:</strong> Fork the project into your sandbox. Write a minimal, elegant fix. Test it thoroughly to verify that it solves the issue without breaking anything else.
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="pipeline-step" style="border-color: var(--border-rose);">
+            <span class="step-num" style="background: rgba(139,87,92,0.3); color: var(--cotton-rose);">PHASE 4</span>
+            <div class="step-title" style="color: var(--cotton-rose);">4. Ship &amp; Collaborate</div>
+            <div class="step-desc">
+              <strong>Innovation:</strong> Submit your Pull Request. Welcome review feedback with humility, iterate on suggestions, and watch your solution ship to thousands of real human users!
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-banner anim-item anim-delay-3" style="margin-top: 1.5rem;">
+          <div class="quote-mark">“</div>
+          <div class="quote-text" style="font-size: 1.25rem;">
+            “You don't start by building an operating system. You start by fixing a typo in the documentation. Every senior maintainer on Earth started with that exact same first step.”
+          </div>
+          <div class="quote-author">
+            <span>— The Golden Rule of Open Source Onboarding</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 13: THE CPI SYNTHESIS MATRIX ==================== -->
+    <section class="slide" id="slide-13">
+      <div class="slide-content">
+        <div class="slide-header anim-item anim-delay-1">
+          <div class="slide-tag tag-pine">// 12 COURSE SYNTHESIS</div>
+          <h2>The CPI Synthesis Matrix: <span class="highlight-pine">Theory to Reality</span></h2>
+          <p class="slide-subtitle">A direct side-by-side mapping of the core academic concepts of HSUV201 to the practical realities of the open-source world.</p>
+        </div>
+
+        <table class="cpsi-matrix anim-item anim-delay-2">
+          <thead>
+            <tr>
+              <th style="width: 22%;">CPI Pillar</th>
+              <th style="width: 38%;">Academic / Theoretical Concept</th>
+              <th style="width: 40%;">Real-World Open Source Reality</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-c">CREATIVITY</span></td>
+              <td>
+                <strong>Design Thinking &amp; Divergent Ideation</strong>
+                • Empathy stage: observing user frustration.<br>
+                • Lateral thinking and brainstorming without judgment.<br>
+                • Combinatorial creativity (remixing concepts).
+              </td>
+              <td>
+                • "Scratching an itch" — organic need-driven tools.<br>
+                • Global cognitive diversity across 150+ countries.<br>
+                • <code>git fork</code>: freedom to prototype without gatekeepers.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-p">PROBLEM SOLVING</span></td>
+              <td>
+                <strong>Root Cause Analysis &amp; Decomposition</strong>
+                • The 5 Whys and First Principles thinking.<br>
+                • Breaking complex systems into conquerable chunks.<br>
+                • Iterative prototyping and feedback loops.
+              </td>
+              <td>
+                • Minimal Reproducible Examples (MREs).<br>
+                • Atomic pull requests (50-line targeted changes).<br>
+                • Constructive peer review and blameless post-mortems.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-i">INNOVATION</span></td>
+              <td>
+                <strong>Open Innovation &amp; Scaling Impact</strong>
+                • Henry Chesbrough’s open boundary model.<br>
+                • Incremental compounding vs. the myth of "Eureka".<br>
+                • Metcalfe’s Law and positive-sum network effects.
+              </td>
+              <td>
+                • $8.8 Trillion shared global digital commons.<br>
+                • Blender, VLC, Linux, NVDA outperforming closed tools.<br>
+                • Everyday students becoming global co-creators.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 14: CONCLUSION ==================== -->
+    <section class="slide" id="slide-14">
+      <div class="slide-content">
+        <div class="title-hero" style="max-width: 1000px;">
+          <div class="subject-badge anim-item anim-delay-1">
+            <span class="badge-dot"></span>
+            HSUV201 Final Conclusion · 25CE099
+          </div>
+
+          <h1 class="anim-item anim-delay-2" style="font-size: clamp(2.4rem, 4.8vw, 3.8rem);">
+            BECOME A <br>
+            <span class="gradient-text">CREATIVE PROBLEM SOLVER</span>
+          </h1>
+
+          <p class="hero-subtitle anim-item anim-delay-3">
+            Open Source teaches us the greatest life lesson of CPI: Do not merely be a passive consumer of other people's technology. Observe the world with empathy, ask why problems exist, and dare to contribute your piece to the shared commons.
+          </p>
+
+          <div class="grid-2 anim-item anim-delay-4" style="margin-top: 1.5rem; width: 100%;">
+            <div class="cpsi-card">
+              <div class="card-title" style="color: var(--pale-sky);">Speaker Details</div>
+              <p class="card-text">
+                <strong>Megh Rana</strong> · Roll: 25CE099<br>
+                Computer Engineering · Batch: 3CE2 A2<br>
+                Course: HSUV201 Creativity, Problem Solving and Innovation
+              </p>
+            </div>
+
+            <div class="cpsi-card card-rose">
+              <div class="card-title" style="color: var(--cotton-rose);">Key Takeaway</div>
+              <p class="card-text">
+                <em>“The best way to predict the future is to build it in the open.”</em><br><br>
+                Thank you!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================== SLIDE OVERVIEW MODAL ==================== -->
+  <div class="overview-modal" id="overviewModal">
+    <div class="overview-header">
+      <div class="overview-title">Slide Overview</div>
+      <button class="close-btn" id="btnCloseOverview" title="Close (Esc)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="overview-grid" id="overviewGrid">
+      <!-- Injected by script.js -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
