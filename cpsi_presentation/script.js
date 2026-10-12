@@ -33,9 +33,9 @@
     '04 · Creativity: Divergent Thinking & Remix Culture',
     '05 · Creativity: Overcoming the Blank Canvas',
     '06 · Problem Solving: Root Causes vs Symptoms',
-    '07 · Problem Solving: Decomposition & First Principles',
+    '07 · Problem Solving: Decomposition & Deconstructing Challenges',
     '08 · Problem Solving: Iterative Loops & Peer Review',
-    '09 · Innovation: Incremental vs Radical Breakthroughs',
+    '09 · Innovation: Incremental Progress & Compounding Impact',
     '10 · Innovation: Open Collaboration & Network Effects',
     '11 · Innovation: Real-World Human Impact & Scaling',
     '12 · The Contributor Playbook: Applying CPI',
@@ -62,9 +62,9 @@
       p.style.borderRadius = '50%';
       p.style.left = Math.random() * 100 + '%';
       p.style.top = Math.random() * 100 + '%';
-      p.style.opacity = (0.15 + Math.random() * 0.25).toString();
+      p.style.opacity = (0.25 + Math.random() * 0.35).toString();
 
-      const size = 1.5 + Math.random() * 3.5;
+      const size = 2 + Math.random() * 3.5;
       p.style.width = size + 'px';
       p.style.height = size + 'px';
       p.style.background = colors[Math.floor(Math.random() * colors.length)];
